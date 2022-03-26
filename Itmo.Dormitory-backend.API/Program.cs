@@ -1,5 +1,7 @@
+using Itmo.Dormitory_backend.API.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 
 namespace Itmo.Dormitory_backend.API
 {
@@ -12,9 +14,8 @@ namespace Itmo.Dormitory_backend.API
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+                .UseSerilog((context, configuration) => configuration.Enrich.FromLogContext().WriteTo.Console())
+                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); })
+                .AddInfrastructure();
     }
 }
