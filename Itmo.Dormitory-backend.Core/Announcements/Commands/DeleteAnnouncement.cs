@@ -7,9 +7,9 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Itmo.Dormitory_backend.Core.Residents.Commands
+namespace Itmo.Dormitory_backend.Core.Announcements.Commands
 {
-    public static class DeleteResident
+    public static class DeleteAnnouncement
     {
         [PublicAPI]
         public record Command(Guid Id) : IRequest;
@@ -26,13 +26,13 @@ namespace Itmo.Dormitory_backend.Core.Residents.Commands
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                var resident = await _dormitoryDbContext.Residents.SingleOrDefaultAsync(
+                var announcement = await _dormitoryDbContext.Announcements.SingleOrDefaultAsync(
                     t => t.Id == request.Id, cancellationToken);
 
-                if (resident is null)
-                    throw new EntityNotFoundException($"Teacher with Id {request.Id} not found");
+                if (announcement is null)
+                    throw new EntityNotFoundException($"Announcement with Id {request.Id} not found");
 
-                _dormitoryDbContext.Residents.Remove(resident);
+                _dormitoryDbContext.Announcements.Remove(announcement);
 
                 await _dormitoryDbContext.SaveChangesAsync(cancellationToken);
 
