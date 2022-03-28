@@ -7,7 +7,7 @@ using Itmo.Dormitory_backend.Core.Residents.Queries;
 namespace Itmo.Dormitory_backend.Core.Residents
 {
     [ApiController]
-    [Route("api/v1/teachers")]
+    [Route("api/v1/residents")]
     public class ResidentsController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -18,26 +18,26 @@ namespace Itmo.Dormitory_backend.Core.Residents
         }
         
         [HttpPost("create")]
-        public async Task<ActionResult<CreateResident.Response>> CreateTeacher(CreateResident.Command command)
+        public async Task<ActionResult<CreateResident.Response>> CreateResident(CreateResident.Command command)
         {
             return await _mediator.Send(command);
         }
         
         [HttpPost("edit")]
-        public async Task<ActionResult<EditResident.Response>> CreateTeacherById(EditResident.Command command)
+        public async Task<ActionResult<EditResident.Response>> EditResident(EditResident.Command command)
         {
             return await _mediator.Send(command);
         }
 
         [HttpPost("delete")]
-        public async Task<ActionResult> DeleteTeacherById(DeleteResident.Command command)
+        public async Task<ActionResult> DeleteResidentById(DeleteResident.Command command)
         {
             await _mediator.Send(command);
             return Ok();
         }
 
         [HttpPost("get-by-id")]
-        public async Task<ActionResult<GetResidentById.Response>> GetTeacherById(GetResidentById.Query query)
+        public async Task<ActionResult<GetResidentById.Response>> GetResidentById(GetResidentById.Query query)
         {
             return await _mediator.Send(query);
         }

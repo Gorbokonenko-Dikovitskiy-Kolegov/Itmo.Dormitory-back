@@ -19,9 +19,9 @@ namespace Itmo.Dormitory_backend.Core.Residents.Commands
         {
             private readonly DormitoryDbContext _dormitoryDbContext;
 
-            public CommandHandler(DormitoryDbContext sdkDbContext)
+            public CommandHandler(DormitoryDbContext dormitoryDbContext)
             {
-                _dormitoryDbContext = sdkDbContext;
+                _dormitoryDbContext = dormitoryDbContext;
             }
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
