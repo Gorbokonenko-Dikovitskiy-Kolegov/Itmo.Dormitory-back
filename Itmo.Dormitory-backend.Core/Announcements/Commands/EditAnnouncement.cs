@@ -55,7 +55,7 @@ namespace Itmo.Dormitory_backend.Core.Announcements.Commands
                 if (announcement is null)
                     throw new EntityNotFoundException($"Announcement with Id {request.Id} not found");
 
-                announcement.Information = new Information(request.Title, request.Description);
+                announcement.Information = new AttachedInformation(request.Title, request.Description);
                 announcement.LastUpdateTime = new DateTime(request.LastUpdateTime.Year, request.LastUpdateTime.Month,
                                                            request.LastUpdateTime.Day, request.LastUpdateTime.Hour, 
                                                            request.LastUpdateTime.Minute, request.LastUpdateTime.Second);

@@ -8,9 +8,9 @@ namespace Itmo.Dormitory_backend.Domain.Entities
         public Guid Id { get; private set; }
         public DateTime CreateTime { get; private init; }
         public DateTime LastUpdateTime { get; set; }
-        public Information Information { get; set; } = null!;
+        public AttachedInformation Information { get; set; } = null!;
         private Announcement() { }
-        public Announcement(Guid id, DateTime createTime, DateTime lastUpdateTime, Information information)
+        public Announcement(Guid id, DateTime createTime, DateTime lastUpdateTime, AttachedInformation information)
         {
             Id = id;
             CreateTime = createTime;

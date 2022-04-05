@@ -56,7 +56,7 @@ namespace Itmo.Dormitory_backend.Core.Announcements.Commands
                                  request.CreateTime.Day, request.CreateTime.Hour,
                                  request.CreateTime.Minute, request.CreateTime.Second),
 
-                    new Information(
+                    new AttachedInformation(
                         request.Title, 
                         request.Description));
 
