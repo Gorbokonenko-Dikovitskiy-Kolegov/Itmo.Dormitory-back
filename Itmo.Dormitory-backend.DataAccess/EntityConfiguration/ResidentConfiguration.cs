@@ -14,6 +14,8 @@ namespace Itmo.Dormitory_backend.DataAccess.EntityConfigurations
             builder.OwnsOne(t => t.Name);
             builder.OwnsOne(t => t.ISUNumber);
             builder.OwnsOne(t => t.RoomNumber);
+            builder.Navigation(c => c.Applications).HasField("_applications");
+            builder.HasMany(c => c.Applications).WithOne(r => r.Resident);
         }
     }
 }
