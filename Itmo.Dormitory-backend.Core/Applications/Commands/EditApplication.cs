@@ -6,27 +6,29 @@ using JetBrains.Annotations;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-
-namespace Itmo.Dormitory_backend.Core.Announcements.Commands
+namespace Itmo.Dormitory_backend.Core.Applications.Commands
 {
-    public static class EditAnnouncement
+    public static class EditApplication
     {
         [PublicAPI]
         public record Command(
                 Guid Id,
                 DateTime LastUpdateTime,
                 string? Title,
-                string Description) : IRequest<Response>;
+                string Description,
+                bool IsResolved) : IRequest<Response>;
 
         [UsedImplicitly]
         public class CommandValidator : AbstractValidator<Command>
         {
             public CommandValidator()
             {
-                RuleFor(x => x.LastUpdateTime).NotEmpty();
                 RuleFor(x => x.Title).MaximumLength(60);
                 RuleFor(x => x.Description).NotEmpty().MaximumLength(2000);
             }
@@ -36,6 +38,7 @@ namespace Itmo.Dormitory_backend.Core.Announcements.Commands
         public record Response(
             Guid Id,
             DateTime LastUpdateTime,
+            string Resident,
             string? Title);
 
         [UsedImplicitly]
@@ -50,21 +53,22 @@ namespace Itmo.Dormitory_backend.Core.Announcements.Commands
 
             public async Task<Response> Handle(Command request, CancellationToken cancellationToken)
             {
-                var announcement = await _dormitoryDbContext.Announcements.SingleOrDefaultAsync(t => t.Id == request.Id, cancellationToken);
+                var application = await _dormitoryDbContext.Applications.SingleOrDefaultAsync(t => t.Id == request.Id, cancellationToken);
 
-                if (announcement is null)
-                    throw new EntityNotFoundException($"Announcement with Id {request.Id} not found");
+                if (application is null)
+                    throw new EntityNotFoundException($"Application with Id {request.Id} not found");
 
-                announcement.Information = new AttachedInformation(request.Title, request.Description);
-                announcement.LastUpdateTime = new DateTime(request.LastUpdateTime.Year, request.LastUpdateTime.Month,
-                                                           request.LastUpdateTime.Day, request.LastUpdateTime.Hour, 
+                application.Information = new AttachedInformation(request.Title, request.Description);
+                application.LastUpdateTime = new DateTime(request.LastUpdateTime.Year, request.LastUpdateTime.Month,
+                                                           request.LastUpdateTime.Day, request.LastUpdateTime.Hour,
                                                            request.LastUpdateTime.Minute, request.LastUpdateTime.Second);
+                application.IsResolved = request.IsResolved;
 
-                _dormitoryDbContext.Announcements.Update(announcement);
+                _dormitoryDbContext.Applications.Update(application);
 
                 await _dormitoryDbContext.SaveChangesAsync(cancellationToken);
 
-                return new Response(announcement.Id, announcement.LastUpdateTime, announcement.Information.Title);
+                return new Response(application.Id, application.LastUpdateTime, application.Resident.Name.LastNameAndInitials, application.Information.Title);
             }
         }
     }

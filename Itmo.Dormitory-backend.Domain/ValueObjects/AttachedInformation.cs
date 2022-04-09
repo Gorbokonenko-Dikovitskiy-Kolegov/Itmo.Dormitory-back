@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace Itmo.Dormitory_backend.Domain.ValueObjects
 {
-    public class Information : ValueObject
+    public class AttachedInformation : ValueObject
     {
         public string? Title { get; private init; }
         public string Description { get; private init; } = null!;
 
-        private Information() { }
-        public Information(string? title, string description)
+        private AttachedInformation() { }
+        public AttachedInformation(string? title, string description)
         {
             Title = title;
             Description = description;

@@ -21,7 +21,7 @@ namespace Itmo.Dormitory_backend.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DormitoryDbContext>(
-                o => o.UseInMemoryDatabase("DormitoryDb"));
+                o => o.UseSqlite($"Data Source={@"D:\STUDY\test.db"}")); // I will definitely remove it.Some day.
             services.AddControllers(options => options.Filters.Add(new GlobalExceptionFilter()));
             services.AddCoreModule();
         }
