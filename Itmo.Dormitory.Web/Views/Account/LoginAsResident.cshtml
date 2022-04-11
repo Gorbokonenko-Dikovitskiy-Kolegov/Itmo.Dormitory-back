@@ -1,0 +1,47 @@
+﻿@{
+    Layout = "_LoginLayout";
+    ViewData["Title"] = "Login as Resident";
+}
+
+<head>
+    <script src="https://yastatic.net/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="~/css/login-page/login-page.css" />
+    <link rel="stylesheet" href="~/css/buttons.css" />
+    <link rel="stylesheet" href="~/css/login-page/login-as-resident.css" />
+</head>
+<body>
+    <div class="continer">
+        <img id="itmo-logo" src="~/images/ItmoLogo blue.png" />
+        <div class="button-container">
+            <div class="line-container">
+                <hr align="left" />
+                <p>Sign in with ISU</p>
+                <hr align="right" />
+            </div>
+            <a asp-area="" asp-controller="Account" asp-action="LoginAsAdmin" class='button -regular center'>Sign in as Administrator</a>
+        </div>
+        <form asp-controller="Announcement" asp-action="Index" method="post" asp-route-returnUrl="@Context.Request.Query["ReturnUrl"]">
+            <div class="textbox-container">
+                <label>
+                    Isu number<span class="req">*</span>
+                </label>
+                <input required placeholder="123456" type="text" autocomplete="off"> <!--todo: когда будем писать бек вставить суда asp-for="Isu Number"-->
+            </div>
+
+            <div class="textbox-container">
+                <label>
+                    Password<span class="req">*</span>
+                </label>
+                <input required placeholder="isu password" type="password" autocomplete="off"> <!--todo: когда будем писать бек вставить суда asp-for="Password"-->
+            </div>
+            <input type="submit" value="Login" class='button -blue center'>
+            <div class="login-helpers-container" >
+                <div class="remember-me">
+                    <input type="checkbox">
+                    <label>Remember me</label>
+                </div>
+                <a class="link" href="#">Forgot password?</a>
+            </div>
+        </form>
+    </div>
+</body>

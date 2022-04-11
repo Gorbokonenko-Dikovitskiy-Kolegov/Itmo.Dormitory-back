@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Itmo.Dormitory.API", "Itmo.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Itmo.Dormitory.Common", "Itmo.Dormitory.Common\Itmo.Dormitory.Common.csproj", "{7B709644-FC96-431A-A33D-E13E6905180C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Itmo.Dormitory.Web", "Itmo.Dormitory.Web\Itmo.Dormitory.Web.csproj", "{BF0DD9BE-239D-40D6-947A-5F34A1BEA853}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{7B709644-FC96-431A-A33D-E13E6905180C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B709644-FC96-431A-A33D-E13E6905180C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B709644-FC96-431A-A33D-E13E6905180C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF0DD9BE-239D-40D6-947A-5F34A1BEA853}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF0DD9BE-239D-40D6-947A-5F34A1BEA853}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF0DD9BE-239D-40D6-947A-5F34A1BEA853}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF0DD9BE-239D-40D6-947A-5F34A1BEA853}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,6 +57,7 @@ Global
 		{7846D40B-3729-4046-9022-548D22F1407D} = {A65536A4-15A1-491C-91A4-08780B6DFBF0}
 		{3302F151-ED89-46A1-AA92-524A3CC0305F} = {A65536A4-15A1-491C-91A4-08780B6DFBF0}
 		{7B709644-FC96-431A-A33D-E13E6905180C} = {A65536A4-15A1-491C-91A4-08780B6DFBF0}
+		{BF0DD9BE-239D-40D6-947A-5F34A1BEA853} = {A65536A4-15A1-491C-91A4-08780B6DFBF0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4AD08B0A-C24E-4865-A64B-FC4968F886E4}

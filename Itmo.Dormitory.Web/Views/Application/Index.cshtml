@@ -1,0 +1,79 @@
+﻿@{
+    ViewData["Title"] = "Applications";
+}
+<head>
+    <script>setActiveNavItem('applications')</script>
+</head>
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/Application.css" />
+    <script src="~/js/paint.js"></script>
+</head>
+<body>
+    <main>
+        <aside class="fonRectangle">
+            <div class="rectangle"></div>
+        </aside>
+        <section class="applications">
+            <ul class="applications__list">
+                <li class="applications__item box-shadow">
+                    <article class="application">
+                        <h3 class="application__title"> Запись на дезинсекцию </h3>
+                        <p class="application__description">Дезинсекция проводится каждую среду</p>
+                        <a class="application__description" href='#modalbox-1'>подробнее</a>
+                        <p class="application__note">прим. Ваше присутствие не обязательно</p>
+                    </article>
+                </li>
+                <li class="applications__item box-shadow">
+                    <article class="application">
+                        <h3 class="application__title"> Вынос вещей </h3>
+                        <p class="application__description">Заявление на внос/вынос крупногабаритных вещей.</p>
+                        <p class="application__note"></p>
+                    </article>
+                </li>
+                <li class="applications__item box-shadow">
+                    <article class="application">
+                        <h3 class="application__title"> Пропуск гостей </h3>
+                        <p class="application__description">Заявление на пропуск посторонних лиц в общежитие</p>
+                        <p class="application__note">прим. Данный тип заявлений подается не позднее чем за сутки до желаемой даты посещения</p>
+                    </article>
+                </li>
+                <li class="applications__item box-shadow">
+                    <article class="application">
+                        <h3 class="application__title"> Ремонтные работы </h3>
+                        <p class="application__description">Починка шкафов, замена лампочек, электричество и т.д</p>
+                        <p class="application__note">прим. По выходным дням ремонт не производится</p>
+                    </article>
+                </li>
+                <li class="applications__item box-shadow">
+                    <article class="application">
+                        <h3 class="application__title"> Прочее </h3>
+                        <p class="application__description">Не нашли то что искали? оставьте вашу заявку здесь</p>
+                        <p class="application__note"></p>
+                    </article>
+                </li>
+            </ul>
+        </section>
+    </main>
+    <script>
+        paint("applications__item");
+    </script>
+    
+
+<div class='modal' id='modalbox-1'>
+      <div class='modalcontent'>
+          <div class='modaltext'>
+              <h3 class="application__title"> Запись на дезинсекцию </h3>
+              <p class="application__description">Дезинсекция проводится каждую среду</p>
+              <p class="application__note">прим. Ваше присутствие не обязательно</p>
+          </div>
+        <a href='#' class='modalclose'>&times;</a>
+      </div>
+    </div>
+
+</body>
+</html>
