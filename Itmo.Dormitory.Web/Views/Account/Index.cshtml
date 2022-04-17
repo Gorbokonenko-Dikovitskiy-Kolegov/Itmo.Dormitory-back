@@ -1,0 +1,23 @@
+﻿@{
+    Layout = "_LoginLayout";
+    ViewData["Title"] = "Login Page";
+}
+
+<head>
+    <script src="https://yastatic.net/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="~/css/login-page/login-page.css" />
+    <link rel="stylesheet" href="~/css/buttons.css" />
+</head>
+<body>
+    <div class="continer">
+        <img id="itmo-logo" src="~/images/ItmoLogo blue.png" />
+        <div class="button-container">
+            <a asp-controller="Account" asp-action="LoginAsResident" class='button -regular center'>Sign in with ISU</a>
+            <a asp-controller="Account" asp-action="LoginAsAdmin" class='button -regular center'>Sign in as an administrator</a>
+        </div>
+        <div class="link-container">
+            <div width="120%"><img src="~/images/Call Icon.png"><a class="link" id="call-support" href="#">Связаться с технической поддержкой</a></div>
+            <div><a class="link" href="#">English</a> | <a class="link" href="#">Русский</a></div>
+        </div>
+    </div>
+</body>

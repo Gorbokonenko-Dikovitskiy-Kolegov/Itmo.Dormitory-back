@@ -1,0 +1,27 @@
+﻿html{
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+    background-image: url(https://i.redd.it/38aeu51hq3d61.jpg);
+}
+
+.login-container {
+    background: white;
+    width: 40%;
+    height: 100%;
+}
+
+@media screen and (max-width: 731px) {
+    .login-container{
+        width: 100%;
+    }
+}
+@media screen and (min-width: 731px) and (max-width: 1200px){
+    .login-container {
+        width: 50%;
+    }
+}

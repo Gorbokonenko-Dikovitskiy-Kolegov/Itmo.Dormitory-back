@@ -1,0 +1,61 @@
+﻿html, body {
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.continer {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: flex-start;
+    align-content: stretch;
+    margin: 0 20%;
+}
+#itmo-logo {
+    width: 60%;
+    margin: 10% auto;
+}
+
+@media screen and (max-width: 731px) {
+    #itmo-logo {
+        width: 80%;
+        margin: 10% auto;
+    }
+    .continer {
+        justify-content: center;
+    }
+}
+.button-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.link-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10%;
+    margin-top: 15%;    
+}
+
+#call-support {
+    top: -25%;
+    position: relative;
+    padding-left: 5px;
+}
+
+.link:link {
+    color: #2d2fb6;
+    text-decoration: none;
+}
+
+.link:visited {
+    color: #2d2fb6;
+}
+
+.link:hover {
+    color: hotpink;
+}
+
+.link:active {
+    color: hotpink;
+}

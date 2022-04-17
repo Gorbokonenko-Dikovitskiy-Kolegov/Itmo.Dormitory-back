@@ -1,0 +1,78 @@
+﻿@model List<Announcement>
+@{
+    ViewData["Title"] = "Announcements";
+}
+<head>
+    <script>
+        setActiveNavItem('announcements');
+        data=@Html.Raw(Json.Serialize(Model));
+    </script>
+</head>
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/Announcement.css" />
+    <script src="~/js/Announcement.js"></script>
+</head>
+<body>
+    <main>
+        <section class="announcements">
+            <ul class="announcements__list">
+                <li class="announcements__item box-shadow" id="announcements__item_$__id__$">
+                    <article class="announcement">
+                        <div class="announcement__description">
+                            <h3 class="announcement__title">$__title__$</h3>
+                            <p class="announcement__content">$__content__$</p>
+                            <p class="announcement__date">$__creationTime__$</p>
+                        </div>
+                    </article>
+                </li>
+            </ul>
+        </section>
+
+        <aside class="fonRectangle">
+            <div class="rectangle"></div>
+        </aside>
+        <section class="filter-container">
+        <div class="filter-box">
+            <div class="search-box">
+                <img src ="~/images/magnifier.png" style="width: 10%; height: 10%">
+                <input id="search" placeholder="Search" type="search">
+            </div>
+            <div class="sort-box">
+                <img >
+                <vr>
+                    <select id="new-first">
+                        <option value="0">Сначала новые</option>
+                        <option value="1">Сначала старые</option>
+                    </select>
+            </div>
+            <hr>
+        </div>
+        <div class="checkbox-container">
+            <label>Category</label>
+            <div class="checkbox">
+                <input type="checkbox">
+                <label>Срочно</label>
+            </div>
+            <div class="checkbox">
+                <input type="checkbox">
+                <label>Новости</label>
+            </div>
+            <div class="checkbox">
+                <input type="checkbox">
+                <label>Разное</label>
+            </div>
+        </div>
+    </section>
+
+    </main>
+    <script>
+        paint("announcements__item");
+    </script>
+
+</body>
+</html>
