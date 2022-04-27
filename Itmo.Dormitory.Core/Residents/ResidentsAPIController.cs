@@ -8,11 +8,11 @@ namespace Itmo.Dormitory.Core.Residents
 {
     [ApiController]
     [Route("api/v1/residents")]
-    public class ResidentsController : ControllerBase
+    public class ResidentsAPIController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public ResidentsController(IMediator mediator)
+        public ResidentsAPIController(IMediator mediator)
         {
             _mediator = mediator;
         }

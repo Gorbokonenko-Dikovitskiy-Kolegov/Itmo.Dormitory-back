@@ -8,11 +8,11 @@ namespace Itmo.Dormitory.Core.Announcements
 {
     [ApiController]
     [Route("api/v1/announcements")]
-    public class AnnouncementsController : ControllerBase
+    public class AnnouncementsAPIController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public AnnouncementsController(IMediator mediator)
+        public AnnouncementsAPIController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -43,7 +43,7 @@ namespace Itmo.Dormitory.Core.Announcements
         }
 
         [HttpPost("get-list")]
-        public async Task<ActionResult<GetAnnouncementsList.Response>> GetTeachersList(GetAnnouncementsList.Query query)
+        public async Task<ActionResult<GetAnnouncementsList.Response>> GetAnnouncementsList(GetAnnouncementsList.Query query)
         {
             return await _mediator.Send(query);
         }
