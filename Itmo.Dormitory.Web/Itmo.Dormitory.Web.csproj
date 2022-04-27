@@ -1,12 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\js\login-page\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Itmo.Dormitory.Core\Itmo.Dormitory.Core.csproj" />
+    <ProjectReference Include="..\Itmo.Dormitory.DataAccess\Itmo.Dormitory.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>
