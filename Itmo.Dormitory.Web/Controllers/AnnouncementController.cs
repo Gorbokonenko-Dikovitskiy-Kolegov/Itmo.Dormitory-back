@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using Itmo.Dormitory.Core.Announcements;
+using Itmo.Dormitory.Core.Announcements.Commands;
 using Itmo.Dormitory.Core.Announcements.Queries;
 using Itmo.Dormitory.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Itmo.Dormitory.Controllers
 {
@@ -29,6 +32,14 @@ namespace Itmo.Dormitory.Controllers
             var announcementList = _announcementsAPIController.GetAnnouncementsList(
                 new GetAnnouncementsList.Query()).Result.Value.Announcements;
             return _mapper.Map<IEnumerable<GetAnnouncementsList.Response.Announcement>, List<Announcement>>(announcementList);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateAnnouncement(string title, string description)
+        {
+            await _announcementsAPIController.CreateAnnouncement(
+                new CreateAnnouncement.Command(DateTime.Now, title, description));
+            return RedirectToAction("Index", "Announcement");
         }
     }
 }

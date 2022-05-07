@@ -37,7 +37,8 @@
             <div class="rectangle"></div>
         </aside>
         <section class="filter-container">
-        <div class="filter-box">
+          <a class="create-button" href="#modalbox-1">Создать объявление</a>
+          <div class="filter-box">
             <div class="search-box">
                 <img src ="~/images/magnifier.png" style="width: 10%; height: 10%">
                 <input id="search" placeholder="Search" type="search">
@@ -51,8 +52,8 @@
                     </select>
             </div>
             <hr>
-        </div>
-        <div class="checkbox-container">
+          </div>
+          <div class="checkbox-container">
             <label>Category</label>
             <div class="checkbox">
                 <input type="checkbox">
@@ -66,10 +67,22 @@
                 <input type="checkbox">
                 <label>Разное</label>
             </div>
-        </div>
-    </section>
+          </div>
+        </section>
 
+
+        <div class="modal" id="modalbox-1">
+          <form method="post" class="modalcontent" action="~/Announcement/CreateAnnouncement">
+            <h1 style="margin-left: 20%;">Создать объявление</h1> <a class="close" href="#">×</a>
+            <input type="text" class="form-input" placeholder="Введите заголовок объявления" name="title" required>
+            <input type="text" class="form-input"placeholder="Введите содержимое объявления" name="description" required>
+ 
+            <button type="submit" class="create-button" style="width: 30%">Создать</button>
+
+          </form>
+          </div>
     </main>
+
     <script>
         paint("announcements__item");
     </script>

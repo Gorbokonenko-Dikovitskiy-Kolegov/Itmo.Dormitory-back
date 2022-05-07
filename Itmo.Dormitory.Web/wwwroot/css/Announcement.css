@@ -40,7 +40,7 @@ main {
 .search-box {
     display: flex;
     justify-content: space-around;
-    padding: 2px;
+    padding: 2%;
     border: 1px solid #888787;
 }
 
@@ -49,6 +49,68 @@ main {
     border: 1px solid #888787;
     padding: 2px;
 }
+
+.create-button {
+    cursor: pointer;
+    line-height: 3rem;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    background-color: #412da9;
+    transition: all 0.3s ease-out;
+    margin-bottom: 4%;
+    border: none;
+}
+
+    .create-button:hover {
+        background-color: #c32370;
+    }
+
+.modal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    visibility: hidden;
+    transition: all 0.4s;
+    background-color: rgba(255, 255, 255, 0.8);
+    opacity: 0;
+}
+
+    .modal:target {
+        visibility: visible;
+        opacity: 1;
+    }
+
+.modalcontent {
+    position: relative;
+    margin-left: 15%;
+    margin-top: 10%;
+    width: 70%;
+    height: 80%;
+    padding: 1em 2em;
+    border: 2px solid darkgrey;
+    border-radius: 5px;
+    background-color: white;
+    align-items: center;
+}
+
+.modal .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+}
+
+    .modal .close:hover {
+        color: #c32370;
+    }
+
 
 input {
     outline: none;
@@ -61,4 +123,13 @@ select {
     -webkit-appearance: none;
     -moz-appearance: none;
     color: #888787;
+}
+.form-input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 18px;
+    border: none;
+    border-bottom: 1px solid #757575;
+    margin-bottom: 40px;
 }
