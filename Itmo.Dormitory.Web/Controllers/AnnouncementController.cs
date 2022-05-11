@@ -34,12 +34,28 @@ namespace Itmo.Dormitory.Controllers
             return _mapper.Map<IEnumerable<GetAnnouncementsList.Response.Announcement>, List<Announcement>>(announcementList);
         }
 
-        [HttpPost]
+        [HttpPost("Announcement/CreateAnnouncement")]
         public async Task<IActionResult> CreateAnnouncement(string title, string description)
         {
             await _announcementsAPIController.CreateAnnouncement(
                 new CreateAnnouncement.Command(DateTime.Now, title, description));
             return RedirectToAction("Index", "Announcement");
         }
+
+        [HttpPost("Announcement/DeleteAnnouncement")]
+        public async Task<IActionResult> DeleteAnnouncement(string id)
+        {
+            await _announcementsAPIController.DeleteAnnouncementById(new DeleteAnnouncement.Command(Guid.Parse(id)));
+            return RedirectToAction("Index", "Announcement");
+        }
+
+        [HttpPost("Announcement/EditAnnouncement")]
+        public async Task<IActionResult> EditAnnouncement(string id, string title, string description)
+        {
+            await _announcementsAPIController.EditAnnouncement(
+                new EditAnnouncement.Command(Guid.Parse(id), DateTime.Now, title, description));
+            return RedirectToAction("Index", "Announcement");
+        }
+
     }
 }

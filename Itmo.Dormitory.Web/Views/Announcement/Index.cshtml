@@ -24,11 +24,27 @@
                 <li class="announcements__item box-shadow" id="announcements__item_$__id__$">
                     <article class="announcement">
                         <div class="announcement__description">
-                            <h3 class="announcement__title">$__title__$</h3>
+                            <h3 class="announcement__title">$__title__$</h3> 
                             <p class="announcement__content">$__description__$</p>
                             <p class="announcement__date">$__lastUpdateTime__$</p>
                         </div>
                     </article>
+                    <section class="Update-container">
+                        <a href="#UpdateForm_$__id__$"><img class="icon" src="~/images/edit.png"></a>
+                        <form method="post" class="close-form" action="~/Announcement/DeleteAnnouncement">
+                            <input type="text" value=$__id__$ name="id" style="visibility: hidden" required>
+                            <button type="submit" class="close">x</button> 
+                        </form>
+                        <div class="modal" id="UpdateForm_$__id__$">
+                            <form method="post" class="modalcontent" action="~/Announcement/EditAnnouncement">
+                             <h1>Обновить объявление</h1> <a class="close" href="#">×</a>
+                             <input type="text" value=$__id__$ name="id" style="visibility: hidden" required>
+                             <input type="text" class="form-input" value=$__title__$ name="title" required>
+                             <input type="text" class="form-input" value=$__description__$ name="description" required>
+                             <button type="submit" class="create">Обновить</button>
+                            </form>
+                        </div>
+                    </section>
                 </li>
             </ul>
         </section>
@@ -37,7 +53,7 @@
             <div class="rectangle"></div>
         </aside>
         <section class="filter-container">
-          <a class="create-button" href="#modalbox-1">Создать объявление</a>
+          <a class="create-button" href="#CreateForm">Создать объявление</a>
           <div class="filter-box">
             <div class="search-box">
                 <img src ="~/images/magnifier.png" style="width: 10%; height: 10%">
@@ -69,16 +85,14 @@
             </div>
           </div>
         </section>
+    
 
-
-        <div class="modal" id="modalbox-1">
+        <div class="modal" id="CreateForm">
           <form method="post" class="modalcontent" action="~/Announcement/CreateAnnouncement">
-            <h1 style="margin-left: 20%;">Создать объявление</h1> <a class="close" href="#">×</a>
+            <h1>Создать объявление</h1> <a class="close" href="#">×</a>
             <input type="text" class="form-input" placeholder="Введите заголовок объявления" name="title" required>
             <input type="text" class="form-input"placeholder="Введите содержимое объявления" name="description" required>
- 
-            <button type="submit" class="create-button" style="width: 30%">Создать</button>
-
+            <button type="submit" class="create">Создать</button>
           </form>
           </div>
     </main>

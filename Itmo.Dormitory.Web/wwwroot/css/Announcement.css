@@ -1,12 +1,12 @@
 ﻿.announcements {
     padding-bottom: 30px;
-    width:50%;
+    width: 50%;
 }
 
 .announcements__list {
     display: flex;
-    gap: 30px;
     flex-direction: column;
+    gap: 30px;
     list-style: none;
 }
 .announcements__item {
@@ -15,12 +15,27 @@
     border-color: #888787;
     width: 100%;
 }
-.announcement__description{
+.announcement__description {
     padding-left: 5%;
 }
 .announcement__date{
     border-top: 1px solid black;
 }
+
+.announcements .close {
+    border: none;
+    transition: all 200ms;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+    display: inline-block;
+    background-color: white;
+    cursor: pointer;
+}
+    .announcements .close:hover {
+        color: #c32370;
+    }
 
 main {
     display: flex;
@@ -76,6 +91,7 @@ main {
     transition: all 0.4s;
     background-color: rgba(255, 255, 255, 0.8);
     opacity: 0;
+    box-sizing: border-box;
 }
 
     .modal:target {
@@ -84,11 +100,10 @@ main {
     }
 
 .modalcontent {
-    position: relative;
-    margin-left: 15%;
+    display: flex;
+    flex-direction: column;
+    margin-right: 15%;
     margin-top: 10%;
-    width: 70%;
-    height: 80%;
     padding: 1em 2em;
     border: 2px solid darkgrey;
     border-radius: 5px;
@@ -97,9 +112,7 @@ main {
 }
 
 .modal .close {
-    position: absolute;
-    top: 20px;
-    right: 30px;
+    box-sizing: border-box;
     transition: all 200ms;
     font-size: 30px;
     font-weight: bold;
@@ -111,6 +124,23 @@ main {
         color: #c32370;
     }
 
+.modal .create {
+    box-sizing: border-box;
+    cursor: pointer;
+    line-height: 3rem;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    background-color: #412da9;
+    transition: all 0.3s ease-out;
+    margin-bottom: 4%;
+    border: none;
+    width: 30%;
+}
+
+    .modal .create:hover {
+        background-color: #c32370;
+    }
 
 input {
     outline: none;
@@ -131,5 +161,5 @@ select {
     font-size: 18px;
     border: none;
     border-bottom: 1px solid #757575;
-    margin-bottom: 40px;
+    margin-bottom: 8%;
 }
