@@ -28,7 +28,7 @@ body {
     margin-bottom: 0;
     list-style: none;
     justify-content: space-around;
-    padding-left:20px;
+    padding-left: 20px;
 }
 
 .navbar-item {
@@ -53,10 +53,10 @@ body {
     align-items: center;
 }
 
-.nav-link p{
-    margin-left:0px;
-    text-align:center;
-}
+    .nav-link p {
+        margin-left: 0px;
+        text-align: center;
+    }
 
 .vertical-center {
     top: 50%;
@@ -73,26 +73,30 @@ body {
     color: white
 }
 
-.nav-link-img{
-    margin:5px;
-    margin-left:5px;
-    width: 50%;
+.nav-link-img {
+    margin: 5px;
+    margin-left: 5px;
+    width: 25%;
 }
 
 @media screen and (max-width: 900px) {
     .nav-link-p {
-        display:none;
+        display: none;
     }
-    .menu{
+
+    .menu {
         width: 20%;
     }
-    .check-square{
-        height:50%;
+
+    .check-square {
+        height: 50%;
     }
-    .navbar-item{
-        align-items:center;
+
+    .navbar-item {
+        align-items: center;
     }
-    #itmo-logo{
+
+    #itmo-logo {
         display: none
     }
 }
