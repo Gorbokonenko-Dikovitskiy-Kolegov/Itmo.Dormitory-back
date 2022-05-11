@@ -23,31 +23,31 @@ namespace Itmo.Dormitory.Core.Applications
             return await _mediator.Send(command);
         }
 
-        [HttpPost("edit")]
+        [HttpPut("edit")]
         public async Task<ActionResult<EditApplication.Response>> EditApplication(EditApplication.Command command)
         {
             return await _mediator.Send(command);
         }
 
-        [HttpPost("delete")]
+        [HttpDelete("delete")]
         public async Task<ActionResult> DeleteApplicationById(DeleteApplication.Command command)
         {
             await _mediator.Send(command);
             return Ok();
         }
 
-        [HttpPost("get-by-id")]
+        [HttpGet("get-by-id")]
         public async Task<ActionResult<GetApplicationById.Response>> GetApplicationById(GetApplicationById.Query query)
         {
             return await _mediator.Send(query);
         }
 
-        [HttpPost("get-by-resident")]
+        [HttpGet("get-by-resident")]
         public async Task<ActionResult<GetApplicationsByResident.Response>> GetApplicationsByResident(GetApplicationsByResident.Query query)
         {
             return await _mediator.Send(query);
         }
-        [HttpPost("get-list")]
+        [HttpGet("get-list")]
         public async Task<ActionResult<GetApplicationsList.Response>> GetApplicationsList(GetApplicationsList.Query query)
         {
             return await _mediator.Send(query);

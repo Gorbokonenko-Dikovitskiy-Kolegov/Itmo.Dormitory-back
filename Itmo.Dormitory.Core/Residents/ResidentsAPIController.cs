@@ -23,20 +23,20 @@ namespace Itmo.Dormitory.Core.Residents
             return await _mediator.Send(command);
         }
         
-        [HttpPost("edit")]
+        [HttpPut("edit")]
         public async Task<ActionResult<EditResident.Response>> EditResident(EditResident.Command command)
         {
             return await _mediator.Send(command);
         }
 
-        [HttpPost("delete")]
+        [HttpDelete("delete")]
         public async Task<ActionResult> DeleteResidentById(DeleteResident.Command command)
         {
             await _mediator.Send(command);
             return Ok();
         }
 
-        [HttpPost("get-by-id")]
+        [HttpGet("get-by-id")]
         public async Task<ActionResult<GetResidentById.Response>> GetResidentById(GetResidentById.Query query)
         {
             return await _mediator.Send(query);

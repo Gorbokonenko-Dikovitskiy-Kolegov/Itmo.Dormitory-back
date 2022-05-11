@@ -23,26 +23,26 @@ namespace Itmo.Dormitory.Core.Announcements
             return await _mediator.Send(command);
         }
 
-        [HttpPost("edit")]
+        [HttpPut("edit")]
         public async Task<ActionResult<EditAnnouncement.Response>> EditAnnouncement(EditAnnouncement.Command command)
         {
             return await _mediator.Send(command);
         }
 
-        [HttpPost("delete")]
+        [HttpDelete("delete")]
         public async Task<ActionResult> DeleteAnnouncementById(DeleteAnnouncement.Command command)
         {
             await _mediator.Send(command);
             return Ok();
         }
 
-        [HttpPost("get-by-id")]
+        [HttpGet("get-by-id")]
         public async Task<ActionResult<GetAnnouncementById.Response>> GetAnnouncementById(GetAnnouncementById.Query query)
         {
             return await _mediator.Send(query);
         }
 
-        [HttpPost("get-list")]
+        [HttpGet("get-list")]
         public async Task<ActionResult<GetAnnouncementsList.Response>> GetAnnouncementsList(GetAnnouncementsList.Query query)
         {
             return await _mediator.Send(query);
