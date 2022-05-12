@@ -29,11 +29,11 @@
                             <p class="announcement__date">$__lastUpdateTime__$</p>
                         </div>
                     </article>
-                    <section class="Update-container">
+                    <div class="Update-container">
                         <a href="#UpdateForm_$__id__$"><img class="icon" src="~/images/edit.png"></a>
                         <form method="post" class="close-form" action="~/Announcement/DeleteAnnouncement">
                             <input type="text" value=$__id__$ name="id" style="visibility: hidden" required>
-                            <button type="submit" class="close">x</button> 
+                            <button type="submit" class="close"><img class="icon" src="~/images/delete.png"></button>
                         </form>
                         <div class="modal" id="UpdateForm_$__id__$">
                             <form method="post" class="modalcontent" action="~/Announcement/EditAnnouncement">
@@ -44,7 +44,7 @@
                              <button type="submit" class="create">Обновить</button>
                             </form>
                         </div>
-                    </section>
+                    </div>
                 </li>
             </ul>
         </section>
