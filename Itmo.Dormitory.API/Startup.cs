@@ -3,6 +3,7 @@ using Itmo.Dormitory.Core;
 using Itmo.Dormitory.DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,6 +25,9 @@ namespace Itmo.Dormitory.API
                 o => o.UseSqlite($"Data Source={@"D:\STUDY\test.db"}")); // I will definitely remove it.Some day.
             services.AddControllers(options => options.Filters.Add(new GlobalExceptionFilter()));
             services.AddCoreModule();
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<DormitoryDbContext>()
+                .AddDefaultTokenProviders();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

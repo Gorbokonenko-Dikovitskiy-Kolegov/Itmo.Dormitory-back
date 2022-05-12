@@ -1,10 +1,11 @@
 ﻿using Itmo.Dormitory.Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 namespace Itmo.Dormitory.DataAccess
 {
-    public class DormitoryDbContext : DbContext
+    public class DormitoryDbContext : IdentityDbContext<AppUser>
     {
-        public DormitoryDbContext(DbContextOptions<DormitoryDbContext> options) : base(options)
+        public DormitoryDbContext(DbContextOptions options) : base(options)
         {
             Database.EnsureCreated();
         }
