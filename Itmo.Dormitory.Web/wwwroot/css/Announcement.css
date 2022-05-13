@@ -118,6 +118,8 @@ main {
     font-weight: bold;
     text-decoration: none;
     color: #333;
+    position: absolute;
+    right: 20%;
 }
 
     .modal .close:hover {
@@ -162,4 +164,18 @@ select {
     border: none;
     border-bottom: 1px solid #757575;
     margin-bottom: 8%;
+}
+
+.close-form {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 4%;
+}
+
+.Update-container {
+    padding-left: 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
 }
