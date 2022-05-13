@@ -36,7 +36,8 @@ namespace Itmo.Dormitory.Core.Users.Commands
         public class CommandHandler : IRequestHandler<Command, Response>
         {
             private readonly UserManager<IdentityUser> _userManager;
-            public CommandHandler(DormitoryDbContext dormitoryDbContext, UserManager<IdentityUser> userManager)
+
+            public CommandHandler(UserManager<IdentityUser> userManager)
             {
                 _userManager = userManager;
             }
@@ -49,6 +50,11 @@ namespace Itmo.Dormitory.Core.Users.Commands
                 };
 
                 var result = await _userManager.CreateAsync(user, request.Password);
+                if (result.Succeeded)
+                {
+                    await _userManager.AddToRoleAsync(user, "Admin");
+                }
+
                 return new Response(result.Succeeded ? user.Id : "Fail");
             }
         }
