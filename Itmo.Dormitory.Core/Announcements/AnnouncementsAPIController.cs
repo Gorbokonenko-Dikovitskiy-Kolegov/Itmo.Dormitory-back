@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Itmo.Dormitory.Core.Announcements.Commands;
 using Itmo.Dormitory.Core.Announcements.Queries;
+using System;
 
 namespace Itmo.Dormitory.Core.Announcements
 {
@@ -36,16 +37,18 @@ namespace Itmo.Dormitory.Core.Announcements
             return Ok();
         }
 
-        [HttpPost("get-by-id")]
-        public async Task<ActionResult<GetAnnouncementById.Response>> GetAnnouncementById(GetAnnouncementById.Query query)
+
+        [HttpGet("get-by-id")]
+        public async Task<ActionResult<GetAnnouncementById.Response>> GetAnnouncementById(Guid id)
         {
-            return await _mediator.Send(query);
+            return await _mediator.Send(new GetAnnouncementById.Query(id));
         }
 
-        [HttpPost("get-list")]
-        public async Task<ActionResult<GetAnnouncementsList.Response>> GetAnnouncementsList(GetAnnouncementsList.Query query)
+
+        [HttpGet("get-list")]
+        public async Task<ActionResult<GetAnnouncementsList.Response>> GetAnnouncementsList()
         {
-            return await _mediator.Send(query);
+            return await _mediator.Send(new GetAnnouncementsList.Query());
         }
     }
 }
