@@ -29,8 +29,7 @@ namespace Itmo.Dormitory.Controllers
 
         public List<Announcement> GetAnnouncements()
         {
-            var announcementList = _announcementsAPIController.GetAnnouncementsList(
-                new GetAnnouncementsList.Query()).Result.Value.Announcements;
+            var announcementList = _announcementsAPIController.GetAnnouncementsList().Result.Value.Announcements;
             return _mapper.Map<IEnumerable<GetAnnouncementsList.Response.Announcement>, List<Announcement>>(announcementList);
         }
 

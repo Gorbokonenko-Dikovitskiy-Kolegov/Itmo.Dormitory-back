@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Itmo.Dormitory.Core.Residents.Commands;
 using Itmo.Dormitory.Core.Residents.Queries;
+using System;
 
 namespace Itmo.Dormitory.Core.Residents
 {
@@ -37,9 +38,9 @@ namespace Itmo.Dormitory.Core.Residents
         }
 
         [HttpGet("get-by-id")]
-        public async Task<ActionResult<GetResidentById.Response>> GetResidentById(GetResidentById.Query query)
+        public async Task<ActionResult<GetResidentById.Response>> GetResidentById(Guid id)
         {
-            return await _mediator.Send(query);
+            return await _mediator.Send(new GetResidentById.Query(id));
         }
     }
 }

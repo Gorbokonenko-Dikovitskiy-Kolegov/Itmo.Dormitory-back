@@ -2,6 +2,7 @@
 using Itmo.Dormitory.Core.Applications.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace Itmo.Dormitory.Core.Applications
@@ -37,20 +38,20 @@ namespace Itmo.Dormitory.Core.Applications
         }
 
         [HttpGet("get-by-id")]
-        public async Task<ActionResult<GetApplicationById.Response>> GetApplicationById(GetApplicationById.Query query)
+        public async Task<ActionResult<GetApplicationById.Response>> GetApplicationById(Guid id)
         {
-            return await _mediator.Send(query);
+            return await _mediator.Send(new GetApplicationById.Query(id));
         }
 
         [HttpGet("get-by-resident")]
-        public async Task<ActionResult<GetApplicationsByResident.Response>> GetApplicationsByResident(GetApplicationsByResident.Query query)
+        public async Task<ActionResult<GetApplicationsByResident.Response>> GetApplicationsByResident(Guid id)
         {
-            return await _mediator.Send(query);
+            return await _mediator.Send(new GetApplicationsByResident.Query(id));
         }
         [HttpGet("get-list")]
-        public async Task<ActionResult<GetApplicationsList.Response>> GetApplicationsList(GetApplicationsList.Query query)
+        public async Task<ActionResult<GetApplicationsList.Response>> GetApplicationsList()
         {
-            return await _mediator.Send(query);
+            return await _mediator.Send(new GetApplicationsList.Query());
         }
     }
 }
