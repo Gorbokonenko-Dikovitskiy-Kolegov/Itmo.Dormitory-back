@@ -1,4 +1,4 @@
-﻿using Itmo.Dormitory.DataAccess;
+using Itmo.Dormitory.DataAccess;
 using Itmo.Dormitory.Web.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -20,10 +20,6 @@ namespace Itmo.Dormitory.Controllers
         {
             return View();
         }
-        public IActionResult LoginAsResident()
-        {
-            return View();
-        }
         public IActionResult LoginAsAdmin()
         {
             return View();
@@ -41,10 +37,10 @@ namespace Itmo.Dormitory.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result =
-                    await _signInManager.PasswordSignInAsync(model.Isu, model.Password, model.RememberMe, false);
+                var result = await _signInManager.PasswordSignInAsync(model.Isu, model.Password, model.RememberMe, false);
                 if (result.Succeeded)
                 {
+                    await _signInManager.SignOutAsync();
                     // проверяем, принадлежит ли URL приложению
                     if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
                     {
@@ -52,7 +48,7 @@ namespace Itmo.Dormitory.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Announcement");
                     }
                 }
                 else
