@@ -27,7 +27,10 @@ namespace Itmo.Dormitory.API
             services.AddCoreModule();
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<DormitoryDbContext>()
-                .AddDefaultTokenProviders();
+                .AddDefaultTokenProviders()
+                .AddUserManager<UserManager<IdentityUser>>()
+                .AddSignInManager<SignInManager<IdentityUser>>();
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

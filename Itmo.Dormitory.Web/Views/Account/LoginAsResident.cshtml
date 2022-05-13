@@ -2,6 +2,8 @@
     Layout = "_LoginLayout";
     ViewData["Title"] = "Login as Resident";
 }
+@model LoginAsResidentViewModel 
+
 
 <head>
     <script src="https://yastatic.net/jquery/3.3.1/jquery.min.js"></script>
@@ -20,24 +22,25 @@
             </div>
             <a asp-area="" asp-controller="Account" asp-action="LoginAsAdmin" class='button -regular center'>Sign in as Administrator</a>
         </div>
-        <form asp-controller="Announcement" asp-action="Index" method="post" asp-route-returnUrl="@Context.Request.Query["ReturnUrl"]">
+        <form asp-controller="Account" asp-action="LoginAsResident" method="post" asp-route-returnUrl="@Model.ReturnUrl">
+            <div asp-validation-summary="ModelOnly"></div>
             <div class="textbox-container">
                 <label>
                     Isu number<span class="req">*</span>
                 </label>
-                <input required placeholder="123456" type="text" autocomplete="off"> <!--todo: когда будем писать бек вставить суда asp-for="Isu Number"-->
+                <input required placeholder="123456" type="text" autocomplete="off" asp-for="Isu"> <!--todo: когда будем писать бек вставить суда asp-for="Isu Number"-->
             </div>
 
             <div class="textbox-container">
                 <label>
                     Password<span class="req">*</span>
                 </label>
-                <input required placeholder="isu password" type="password" autocomplete="off"> <!--todo: когда будем писать бек вставить суда asp-for="Password"-->
+                <input required placeholder="isu password" type="password" autocomplete="off" asp-for="Password"> <!--todo: когда будем писать бек вставить суда asp-for="Password"-->
             </div>
             <input type="submit" value="Login" class='button -blue center'>
             <div class="login-helpers-container" >
                 <div class="remember-me">
-                    <input type="checkbox">
+                     <input asp-for="RememberMe" type="checkbox"/>
                     <label>Remember me</label>
                 </div>
                 <a class="link" href="#">Forgot password?</a>
