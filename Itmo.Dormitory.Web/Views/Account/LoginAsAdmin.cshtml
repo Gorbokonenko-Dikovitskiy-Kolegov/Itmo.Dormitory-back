@@ -3,6 +3,8 @@
     ViewData["Title"] = "Login as Admin";
 }
 
+@model LoginAsAdminViewModel 
+
 <head>
     <script src="https://yastatic.net/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="~/css/login-page/login-page.css" />
@@ -20,24 +22,24 @@
                 <hr align="right" />
             </div>
         </div>
-        <form asp-controller="Announcement" asp-action="Index" method="post" asp-route-returnUrl="@Context.Request.Query["ReturnUrl"]">
+        <form asp-controller="Account" asp-action="LoginAsAdmin" method="post" asp-route-returnUrl="@Model.ReturnUrl">
+            <div asp-validation-summary="ModelOnly"></div>
             <div class="textbox-container">
                 <label>
                     Email<span class="req">*</span>
                 </label>
-                <input required placeholder="example@test.com" type="email" autocomplete="off"> <!--todo: когда будем писать бек вставить суда asp-for="Isu Number"-->
-            </div>
+                <input required placeholder="example@test.com" type="email" autocomplete="off" asp-for="Email"> 
 
             <div class="textbox-container">
                 <label>
                     Password<span class="req">*</span>
                 </label>
-                <input required placeholder="min 8 characters" type="password" autocomplete="off"> <!--todo: когда будем писать бек вставить суда asp-for="Password"-->
+                <input required placeholder="min 8 characters" type="password" autocomplete="off" asp-for="Password"> <!--todo: когда будем писать бек вставить суда asp-for="Password"-->
             </div>
             <input type="submit" value="Login" class='button -blue center'>
             <div class="login-helpers-container">
                 <div class="remember-me">
-                    <input type="checkbox" height="10px">
+                    <input asp-for="RememberMe" type="checkbox"/>
                     <label>Remember me</label>
                 </div>
                 <a class="link" href="#">Forgot password?</a>

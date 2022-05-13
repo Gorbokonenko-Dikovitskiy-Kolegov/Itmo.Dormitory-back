@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Itmo.Dormitory.DataAccess;
 using Itmo.Dormitory.Core;
 using Itmo.Dormitory.Core.Announcements;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Itmo.Dormitory.Web
 {
@@ -26,6 +28,11 @@ namespace Itmo.Dormitory.Web
             services.AddControllersWithViews();
             services.AddScoped<AnnouncementsAPIController>();
             services.AddCoreModule();
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<DormitoryDbContext>()
+                .AddDefaultTokenProviders()
+                .AddUserManager<UserManager<IdentityUser>>()
+                .AddSignInManager<SignInManager<IdentityUser>>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -45,6 +52,7 @@ namespace Itmo.Dormitory.Web
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {

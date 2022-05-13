@@ -20,4 +20,8 @@
     <ProjectReference Include="..\Itmo.Dormitory.Domain\Itmo.Dormitory.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Users\Queries\" />
+  </ItemGroup>
+
 </Project>
