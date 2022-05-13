@@ -1,98 +1,34 @@
 ﻿@{
     ViewData["Title"] = "Reservation";
 }
+
+<!DOCTYPE html>
+
+<html lang="ru">
 <head>
+    <title>Reservations</title>
     <link rel="stylesheet" href="css/reservations.css">
-    <script src="js/reservations.js" language="javascript" type="text/javascript"></script>
-    <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script><script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
-    <script>setActiveNavItem('reservation')</script>
-    <script src='https://unpkg.com/datetime-slot-picker/dist/datetime-slot-picker/datetime-slot-picker.js'></script>
 </head>
 
 <body>
-<!-- START OF SLIDER -->
-<div class="carousel">
-    <div class="carousel-inner">
-        <input class="carousel-open" type="radio" id="carousel-1" name="carousel" aria-hidden="true" hidden="" checked="checked">
-        <div class="carousel-item">
-            <img src="images/billiard.jpg" style="filter: brightness(50%)">
-            <h2>Billiard Room</h2>
-        </div>
-        <input class="carousel-open" type="radio" id="carousel-2" name="carousel" aria-hidden="true" hidden="">
-        <div class="carousel-item">
-            <img src="images/study_room.jpg" style="filter: brightness(50%)">
-            <h2>Study Room</h2>
-        </div>
-        <input class="carousel-open" type="radio" id="carousel-3" name="carousel" aria-hidden="true" hidden="">
-        <div class="carousel-item">
-            <img src="images/table_tennis.jpg" style="filter: brightness(50%)">
-            <h2>Tennis Room</h2>
-        </div>
-        <label for="carousel-3" class="carousel-control prev control-1">‹</label>
-        <label for="carousel-2" class="carousel-control next control-1">›</label>
-        <label for="carousel-1" class="carousel-control prev control-2">‹</label>
-        <label for="carousel-3" class="carousel-control next control-2">›</label>
-        <label for="carousel-2" class="carousel-control prev control-3">‹</label>
-        <label for="carousel-1" class="carousel-control next control-3">›</label>
-        <ol class="carousel-indicators">
-            <li>
-                <label for="carousel-1" class="carousel-bullet">•</label>
-            </li>
-            <li>
-                <label for="carousel-2" class="carousel-bullet">•</label>
-            </li>
-            <li>
-                <label for="carousel-3" class="carousel-bullet">•</label>
-            </li>
-        </ol>
-    </div>
+<header>
+    <h1 class="room__header">Выберете комнату для бронирования:</h1>
+</header>
+<div>
+    <section onclick="" class="room__container">
+        <img class="rooms__img" src="images/billiard.jpg" alt="billiard"/>
+        <a class="rooms__text" onclick="location.href='@Url.Action("Reserve","Reservation", new {roomName = "billiard"})'">Бильярд</a>
+    </section>
+    
+    <section class="room__container">
+        <img class="rooms__img" src="images/table_tennis.jpg" alt="tennis"/>
+        <p class="rooms__text" onclick="location.href='@Url.Action("Reserve","Reservation", new {roomName = "tennis"})'">Теннис</p>
+    </section>
+    
+    <section class="room__container">
+        <img class="rooms__img" src="images/study_room.jpg" alt="study"/>
+        <p class="rooms__text" onclick="location.href='@Url.Action("Reserve","Reservation", new {roomName = "study"})'">Учебка</p>
+    </section>
 </div>
-<!--
-<input type="text" id="datepicker">
--->
-    <article class="button-part">
-    <div class="timepicker">
-        <datetime-slot-picker 
-            placeholder="Выберете свободную дату и время" 
-            time-slots-text="Время"
-            no-slots-text="Нет доступных слотов" 
-            class="picker"
-        >
-        </datetime-slot-picker>
-    </div>
-    <div>
-        <button class="reserve" id="button">Reserve</button>
-    </div>
-    </article>
 </body>
-<!--
-<script src="pikaday.js"></script>
-<script>
-    var picker = new Pikaday({ field: document.getElementById('datepicker') });
-</script>
--->
-<script>
-const datetimeSlotPicker = document.querySelector('datetime-slot-picker');
-    datetimeSlotPicker.addEventListener('slotUpdate', function(event){ console.log('Updated Slot: ', event.detail) });
-    datetimeSlotPicker.slots = [
-        {
-            date: 'Mon, 6 Dec 2021',
-            timeSlots: [
-            '10:00 AM',
-            '11:00 AM',
-            '4:00 PM',
-            '5:00 PM'
-            ]
-        },
-        {
-            date: 'Sun, 5 Dec 2021',
-            timeSlots: [
-            '10:00 AM',
-            '11:00 AM',
-            '4:00 PM',
-            '5:00 PM'
-            ]
-        }
-    ];
-</script>
+</html>

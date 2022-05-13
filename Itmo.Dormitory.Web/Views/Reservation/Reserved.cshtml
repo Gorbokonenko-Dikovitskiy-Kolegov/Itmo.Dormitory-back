@@ -1,0 +1,31 @@
+@{
+    ViewData["Title"] = "Reserved";
+}
+
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <title>Reserved</title>
+</head>
+<body>
+<header>
+    <h1 class="room__header">Результат:</h1>
+</header>
+<div>
+    @if (ViewBag.Success)
+    {
+        <p>Слот успешно зарезервирован</p>
+    }
+    @if (!ViewBag.Success)
+    {
+        <p>Слот уже кто-то занял :( Попробуйте другой</p>
+    }
+    <button onclick="location.href='@Url.Action("Index", "Reservation")'" style="margin-top: 5%">Назад</button>
+</div>
+</body>
+</html>
+
+
+
+
