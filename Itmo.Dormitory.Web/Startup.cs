@@ -7,8 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Itmo.Dormitory.DataAccess;
 using Itmo.Dormitory.Core;
 using Itmo.Dormitory.Core.Announcements;
+using Itmo.Dormitory.Core.Reservations;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Itmo.Dormitory.Web
 {
@@ -24,9 +24,10 @@ namespace Itmo.Dormitory.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DormitoryDbContext>(
-                o => o.UseSqlite($"Data Source={@"D:\STUDY\test.db"}")); // I will definitely remove it. Some day.
+                o => o.UseSqlite(Configuration["ConnectionString"]));
             services.AddControllersWithViews();
             services.AddScoped<AnnouncementsAPIController>();
+            services.AddScoped<ReservationsAPIController>();
             services.AddCoreModule();
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<DormitoryDbContext>()

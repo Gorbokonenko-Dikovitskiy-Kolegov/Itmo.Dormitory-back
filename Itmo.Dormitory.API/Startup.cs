@@ -22,7 +22,7 @@ namespace Itmo.Dormitory.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DormitoryDbContext>(
-                o => o.UseSqlite($"Data Source={@"D:\STUDY\test.db"}")); // I will definitely remove it.Some day.
+                o => o.UseSqlite(Configuration["ConnectionString"]));
             services.AddControllers(options => options.Filters.Add(new GlobalExceptionFilter()));
             services.AddCoreModule();
             services.AddIdentity<IdentityUser, IdentityRole>()
