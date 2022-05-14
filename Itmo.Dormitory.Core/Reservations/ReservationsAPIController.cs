@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Itmo.Dormitory.Core.Reservations.Commands;
 using Itmo.Dormitory.Core.Reservations.Queries;
@@ -24,9 +25,21 @@ namespace Itmo.Dormitory.Core.Reservations
         }
         
         [HttpPut("reserve-slot/{id}")]
-        public async Task<bool> Reserve(int id)
+        public async Task<bool> ReserveSlot(int id)
         {
-            return await _mediator.Send(new Reserve.Query(id));
+            return await _mediator.Send(new Reserve.Command(id));
+        }
+        
+        [HttpPost("create-slot/{roomName}/{starts}")]
+        public async Task CreateSlot(string roomName, DateTime starts)
+        {
+            await _mediator.Send(new Create.Command(roomName, starts));
+        }
+        
+        [HttpPost("remove-slot/{id}")]
+        public async Task RemoveSlot(int id)
+        {
+            await _mediator.Send(new Remove.Command(id));
         }
     }
 }

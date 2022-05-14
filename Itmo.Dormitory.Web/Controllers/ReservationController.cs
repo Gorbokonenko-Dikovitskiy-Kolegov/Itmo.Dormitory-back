@@ -24,7 +24,7 @@ namespace Itmo.Dormitory.Controllers
         
         public IActionResult Reserved(int id)
         {
-            ViewBag.Success = _controller.Reserve(id).Result;
+            ViewBag.Success = _controller.ReserveSlot(id).Result;
             return View();
         }
     }

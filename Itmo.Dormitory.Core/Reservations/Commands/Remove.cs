@@ -9,33 +9,27 @@ using Microsoft.EntityFrameworkCore;
 namespace Itmo.Dormitory.Core.Reservations.Commands
 {
     [ApiExplorerSettings(GroupName = "Reservations")]
-    public class Reserve : ControllerBase
+    public class Remove : ControllerBase
     {
-        public record Command(int Id) : IListRequest<bool>;
+        public record Command(int Id) : IRequest<Unit>;
 
-        public class Handler : IRequestHandler<Command, bool>
+
+        public class Handler : IRequestHandler<Command, Unit>
         {
             private readonly DormitoryDbContext _db;
 
             public Handler(DormitoryDbContext db) => _db = db;
 
-            public async Task<bool> Handle(Command command, CancellationToken cancellationToken)
+            public async Task<Unit> Handle(Command command, CancellationToken cancellationToken)
             {
                 var reservation = await _db.Reservations
                     .Where(r => r.Id == command.Id)
-                    .Where(r => r.Reserved == false)
-                    .SingleOrDefaultAsync(cancellationToken);
+                    .SingleAsync(cancellationToken);
 
-                if (reservation is null)
-                {
-                    return false;
-                }
-
-                reservation.Reserved = true;
-                _db.Reservations.Update(reservation);
+                _db.Reservations.Remove(reservation);
                 await _db.SaveChangesAsync(cancellationToken);
-                
-                return true;
+
+                return Unit.Value;
             }
         }
     }
