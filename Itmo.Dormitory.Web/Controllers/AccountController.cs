@@ -33,6 +33,7 @@ namespace Itmo.Dormitory.Controllers
         {
             if (ModelState.IsValid)
             {
+                await _signInManager.SignOutAsync();
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
                 if (result.Succeeded)
                 {
@@ -68,10 +69,10 @@ namespace Itmo.Dormitory.Controllers
         {
             if (ModelState.IsValid)
             {
+                await _signInManager.SignOutAsync();
                 var result = await _signInManager.PasswordSignInAsync(model.Isu, model.Password, model.RememberMe, false);
                 if (result.Succeeded)
                 {
-                    await _signInManager.SignOutAsync();
                     // проверяем, принадлежит ли URL приложению
                     if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
                     {
