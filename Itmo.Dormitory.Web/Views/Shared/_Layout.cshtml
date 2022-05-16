@@ -11,10 +11,15 @@
 </head>
 <body>
     <header>
-        <div class="menu">
-            <a asp-area="" asp-controller="Account" asp-action="Logout">
-                Log Out
-            </a>
+        <div class="menu">          
+            
+            <div class="logout-container">  
+	            <a class="logout-button"  asp-area="" asp-controller="Account" asp-action="Logout" >
+  	                <img class="user-pic" src="https://pbs.twimg.com/profile_images/378800000639740507/fc0aaad744734cd1dbc8aeb3d51f8729_400x400.jpeg">  
+                    <div class="logout">LOGOUT</div>
+	            </a>  
+            </div>
+
             <img id ="itmo-logo" src="~/images/ItmoLogo.png" style="margin: 15% 0 0 0"/>
             <ul class="navbar">
                 <li class="navbar-item" id="announcements">
