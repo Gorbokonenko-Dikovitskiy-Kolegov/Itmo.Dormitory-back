@@ -18,6 +18,8 @@ namespace Itmo.Dormitory.Controllers
 
         public IActionResult Index()
         {
+            if(_signInManager.IsSignedIn(User))
+                return RedirectToAction("Index", "Announcement");
             return View();
         }
 
@@ -91,13 +93,10 @@ namespace Itmo.Dormitory.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
-            // удаляем аутентификационные куки
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return View("Index");
         }
     }
 }
