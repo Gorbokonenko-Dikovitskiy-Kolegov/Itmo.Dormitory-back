@@ -6,13 +6,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Itmo.Dormitory</title>
-    <!--<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> -->
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/nav-bar.css" />
 </head>
 <body>
     <header>
         <div class="menu">
+            <a asp-area="" asp-controller="Account" asp-action="Logout">
+                Log Out
+            </a>
             <img id ="itmo-logo" src="~/images/ItmoLogo.png" style="margin: 15% 0 0 0"/>
             <ul class="navbar">
                 <li class="navbar-item" id="announcements">
@@ -37,28 +39,6 @@
                     </a>
                 </li>
             </ul>
-            <!--
-    <div class="container">
-        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Itmo.Dormitory</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-            <ul class="navbar-nav flex-grow-1">
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Announcement" asp-action="Index">Объявления</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Application" asp-action="Index">Заявления</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Reservation" asp-action="Index">Бронирование комнат</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-        -->
         </div>
     </header>
     <div class="container">
