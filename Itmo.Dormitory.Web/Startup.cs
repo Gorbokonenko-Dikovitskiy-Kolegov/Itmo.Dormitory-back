@@ -28,11 +28,19 @@ namespace Itmo.Dormitory.Web
             services.AddControllersWithViews();
             services.AddScoped<AnnouncementsAPIController>();
             services.AddCoreModule();
+
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<DormitoryDbContext>()
                 .AddDefaultTokenProviders()
                 .AddUserManager<UserManager<IdentityUser>>()
                 .AddSignInManager<SignInManager<IdentityUser>>();
+
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Account/Index";
+                options.AccessDeniedPath = "/Account/Index";
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
