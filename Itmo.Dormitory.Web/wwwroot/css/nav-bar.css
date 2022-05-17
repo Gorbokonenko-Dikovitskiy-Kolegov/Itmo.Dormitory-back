@@ -174,19 +174,17 @@ body {
 }
 
     #toast #img {
-        width: 50px;
-        height: 50px;
+        height: 100%;
         float: left;
-        padding-top: 16px;
-        padding-bottom: 16px;
+        padding: 8px;
         box-sizing: border-box;
-        background-color: #111;
+        background-color: transparent;
         color: #fff;
     }
 
     #toast #desc {
+        padding-top: 12px;
         color: #fff;
-        padding: 16px;
         overflow: hidden;
         white-space: nowrap;
     }
