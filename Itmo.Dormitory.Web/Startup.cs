@@ -8,8 +8,7 @@ using Itmo.Dormitory.DataAccess;
 using Itmo.Dormitory.Core;
 using Itmo.Dormitory.Core.Announcements;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Itmo.Dormitory.Web.SignalR;
+using Itmo.Dormitory.Core.SignalR;
 
 namespace Itmo.Dormitory.Web
 {
