@@ -61,7 +61,8 @@ namespace Itmo.Dormitory.Core.Applications.Commands
                 application.Information = new AttachedInformation(request.Title, request.Description);
                 application.LastUpdateTime = new DateTime(request.LastUpdateTime.Year, request.LastUpdateTime.Month,
                                                            request.LastUpdateTime.Day, request.LastUpdateTime.Hour,
-                                                           request.LastUpdateTime.Minute, request.LastUpdateTime.Second);
+                                                           request.LastUpdateTime.Minute, request.LastUpdateTime.Second,
+                                                           DateTimeKind.Utc);
                 application.IsResolved = request.IsResolved;
 
                 _dormitoryDbContext.Applications.Update(application);

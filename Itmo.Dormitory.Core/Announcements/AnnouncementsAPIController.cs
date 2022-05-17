@@ -24,7 +24,7 @@ namespace Itmo.Dormitory.Core.Announcements
             return await _mediator.Send(command);
         }
 
-        [HttpPost("edit")]
+        [HttpPut("edit")]
         public async Task<ActionResult<EditAnnouncement.Response>> EditAnnouncement(EditAnnouncement.Command command)
         {
             return await _mediator.Send(command);
