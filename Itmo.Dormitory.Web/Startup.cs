@@ -8,7 +8,7 @@ using Itmo.Dormitory.DataAccess;
 using Itmo.Dormitory.Core;
 using Itmo.Dormitory.Core.Announcements;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection.Extensions;
+using Itmo.Dormitory.Core.SignalR;
 
 namespace Itmo.Dormitory.Web
 {
@@ -41,6 +41,9 @@ namespace Itmo.Dormitory.Web
                 options.LoginPath = "/Account/Index";
                 options.AccessDeniedPath = "/Account/Index";
             });
+
+            services.AddSignalR();
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -67,6 +70,11 @@ namespace Itmo.Dormitory.Web
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Account}/{action=Index}");
+            });
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapHub<DormitoryHub>("/dormitory");
             });
         }
     }

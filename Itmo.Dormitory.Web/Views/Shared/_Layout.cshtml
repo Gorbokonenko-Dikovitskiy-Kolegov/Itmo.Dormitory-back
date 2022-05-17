@@ -8,6 +8,9 @@
     <title>@ViewData["Title"] - Itmo.Dormitory</title>
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/nav-bar.css" />
+    <script src="~/js/signalr/dist/browser/signalr.min.js"></script>
+    <script src="~/js/signalR-announcement.js"></script>
+    <link rel="stylesheet" href="~/css/announcement-notification.css" />
 </head>
 <body>
     <header>
@@ -19,6 +22,8 @@
                     <div class="logout">LOGOUT</div>
 	            </a>  
             </div>
+
+            <div id="toast"><img id="img" src="~/images/Announcement.png"/><div id="desc">Появилось новое объявление</div></div>
 
             <img id ="itmo-logo" src="~/images/ItmoLogo.png" style="margin: 15% 0 0 0"/>
             <ul class="navbar">
