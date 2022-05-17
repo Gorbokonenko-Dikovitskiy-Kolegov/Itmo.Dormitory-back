@@ -31,6 +31,7 @@ namespace Itmo.Dormitory.API
                 .AddUserManager<UserManager<IdentityUser>>()
                 .AddSignInManager<SignInManager<IdentityUser>>();
 
+            services.AddSignalR();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
