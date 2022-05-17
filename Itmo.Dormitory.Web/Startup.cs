@@ -23,8 +23,8 @@ namespace Itmo.Dormitory.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DormitoryDbContext>(
-                o => o.UseSqlite($"Data Source={@"D:\STUDY\test.db"}")); // I will definitely remove it. Some day.
+            services.AddDbContext<DormitoryDbContext>(o =>
+                 o.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllersWithViews();
             services.AddScoped<AnnouncementsAPIController>();
             services.AddCoreModule();
