@@ -18,18 +18,29 @@ namespace Itmo.Dormitory.Core.Announcements
             _mediator = mediator;
         }
 
+
+        /// <summary>
+        /// Создать новое объявление
+        /// </summary>
         [HttpPost("create")]
         public async Task<ActionResult<CreateAnnouncement.Response>> CreateAnnouncement(CreateAnnouncement.Command command)
         {
             return await _mediator.Send(command);
         }
 
+
+        /// <summary>
+        /// Изменить существующее объявление
+        /// </summary>
         [HttpPost("edit")]
         public async Task<ActionResult<EditAnnouncement.Response>> EditAnnouncement(EditAnnouncement.Command command)
         {
             return await _mediator.Send(command);
         }
 
+        /// <summary>
+        /// Удалить существующее объявление
+        /// </summary>
         [HttpPost("delete")]
         public async Task<ActionResult> DeleteAnnouncementById(DeleteAnnouncement.Command command)
         {
@@ -37,14 +48,18 @@ namespace Itmo.Dormitory.Core.Announcements
             return Ok();
         }
 
-
+        /// <summary>
+        /// Получить существующее объявление
+        /// </summary>
         [HttpGet("get-by-id")]
         public async Task<ActionResult<GetAnnouncementById.Response>> GetAnnouncementById(Guid id)
         {
             return await _mediator.Send(new GetAnnouncementById.Query(id));
         }
 
-
+        /// <summary>
+        /// Получить все существующие объявления
+        /// </summary>
         [HttpGet("get-list")]
         public async Task<ActionResult<GetAnnouncementsList.Response>> GetAnnouncementsList()
         {

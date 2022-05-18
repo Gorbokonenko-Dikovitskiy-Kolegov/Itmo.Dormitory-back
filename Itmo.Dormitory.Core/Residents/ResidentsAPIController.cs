@@ -17,19 +17,28 @@ namespace Itmo.Dormitory.Core.Residents
         {
             _mediator = mediator;
         }
-        
+
+        /// <summary>
+        /// Создать нового постояльца
+        /// </summary>
         [HttpPost("create")]
         public async Task<ActionResult<CreateResident.Response>> CreateResident(CreateResident.Command command)
         {
             return await _mediator.Send(command);
         }
-        
+
+        /// <summary>
+        /// Изменить существующего постояльца
+        /// </summary>
         [HttpPut("edit")]
         public async Task<ActionResult<EditResident.Response>> EditResident(EditResident.Command command)
         {
             return await _mediator.Send(command);
         }
 
+        /// <summary>
+        /// Удалить существующего постояльца
+        /// </summary>
         [HttpDelete("delete")]
         public async Task<ActionResult> DeleteResidentById(DeleteResident.Command command)
         {
@@ -37,6 +46,9 @@ namespace Itmo.Dormitory.Core.Residents
             return Ok();
         }
 
+        /// <summary>
+        /// Получить существующего постояльца
+        /// </summary>
         [HttpGet("get-by-id")]
         public async Task<ActionResult<GetResidentById.Response>> GetResidentById(Guid id)
         {
