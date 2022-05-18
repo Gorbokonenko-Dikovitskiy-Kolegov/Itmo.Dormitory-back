@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Itmo.Dormitory.API.Infrastructure.StartupFilters;
+using System;
 
 namespace Itmo.Dormitory.API.Infrastructure.Extensions
 {
@@ -18,7 +19,17 @@ namespace Itmo.Dormitory.API.Infrastructure.Extensions
 
                 services.AddSwaggerGen(options =>
                 {
-                    options.SwaggerDoc("v1", new OpenApiInfo { Title = "Itmo.Dormitory.API", Version = "v1" });
+                    options.SwaggerDoc("v1", new OpenApiInfo
+                    {
+                        Version = "v1",
+                        Title = "Dormitory API",
+                        Description = "Here you can manage the Dormitory",
+                        Contact = new OpenApiContact
+                        {
+                            Name = "О возникших проблемах можно сообщить здесь",
+                            Url = new Uri("https://github.com/Gorbokonenko-Dikovitskiy-Kolegov/Itmo.Dormitory-back/issues")
+                        }
+                    });
 
                     options.CustomSchemaIds(selector =>
                     {
