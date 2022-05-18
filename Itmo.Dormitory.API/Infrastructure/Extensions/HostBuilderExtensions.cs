@@ -5,6 +5,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Itmo.Dormitory.API.Infrastructure.StartupFilters;
 using System;
+using System.Reflection;
+using System.IO;
+using System.Linq;
 
 namespace Itmo.Dormitory.API.Infrastructure.Extensions
 {
@@ -29,6 +32,17 @@ namespace Itmo.Dormitory.API.Infrastructure.Extensions
                             Name = "О возникших проблемах можно сообщить здесь",
                             Url = new Uri("https://github.com/Gorbokonenko-Dikovitskiy-Kolegov/Itmo.Dormitory-back/issues")
                         }
+                    });
+
+                    var currentAssembly = Assembly.GetExecutingAssembly();
+                    var xmlDocs = currentAssembly.GetReferencedAssemblies()
+                    .Union(new AssemblyName[] { currentAssembly.GetName() })
+                    .Select(a => Path.Combine(Path.GetDirectoryName(currentAssembly.Location), $"{a.Name}.xml"))
+                    .Where(f => File.Exists(f)).ToArray();
+
+                    Array.ForEach(xmlDocs, (d) =>
+                    {
+                        options.IncludeXmlComments(d);
                     });
 
                     options.CustomSchemaIds(selector =>
