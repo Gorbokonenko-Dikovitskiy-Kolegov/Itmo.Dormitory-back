@@ -9,6 +9,7 @@ using Itmo.Dormitory.Core;
 using Itmo.Dormitory.Core.Announcements;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using System;
 
 namespace Itmo.Dormitory.Web
 {
@@ -23,8 +24,13 @@ namespace Itmo.Dormitory.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
+            var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+            /*
             services.AddDbContext<DormitoryDbContext>(o =>
                  o.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+            */
+            services.AddDbContext<DormitoryDbContext>(o =>
+                o.UseNpgsql(connectionString));
             services.AddControllersWithViews();
             services.AddScoped<AnnouncementsAPIController>();
             services.AddCoreModule();
