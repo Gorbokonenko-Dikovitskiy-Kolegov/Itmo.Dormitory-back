@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -8,6 +8,7 @@ using System;
 using System.Reflection;
 using System.IO;
 using System.Linq;
+using Itmo.Dormitory.API.Infrastructure.Authentification;
 
 namespace Itmo.Dormitory.API.Infrastructure.Extensions
 {
@@ -58,6 +59,31 @@ namespace Itmo.Dormitory.API.Infrastructure.Extensions
 
                         typeNames.Reverse();
                         return string.Join(".", typeNames);
+                    });
+
+                    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                    {
+                        In = ParameterLocation.Header,
+                        Description = "Please enter token",
+                        Name = "Authorization",
+                        Type = SecuritySchemeType.Http,
+                        BearerFormat = "JWT",
+                        Scheme = "bearer"
+                    });
+
+                    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                    {
+                        {
+                            new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                {
+                                    Type=ReferenceType.SecurityScheme,
+                                    Id="Bearer"
+                                }
+                            },
+                            new string[]{}
+                        }
                     });
                 });
             });

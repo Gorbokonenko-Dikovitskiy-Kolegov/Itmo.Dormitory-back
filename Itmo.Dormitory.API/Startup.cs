@@ -35,8 +35,10 @@ namespace Itmo.Dormitory.API
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
+        {          
             app.UseRouting();
+            app.UseAuthorization();
+            app.UseAuthentication();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
