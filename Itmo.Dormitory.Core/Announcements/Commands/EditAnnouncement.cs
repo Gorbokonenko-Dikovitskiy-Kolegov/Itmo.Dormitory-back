@@ -60,7 +60,8 @@ namespace Itmo.Dormitory.Core.Announcements.Commands
                 announcement.Information = new AttachedInformation(request.Title, request.Description);
                 announcement.LastUpdateTime = new DateTime(request.LastUpdateTime.Year, request.LastUpdateTime.Month,
                                                            request.LastUpdateTime.Day, request.LastUpdateTime.Hour, 
-                                                           request.LastUpdateTime.Minute, request.LastUpdateTime.Second);
+                                                           request.LastUpdateTime.Minute, request.LastUpdateTime.Second,
+                                                           DateTimeKind.Utc);
 
                 _dormitoryDbContext.Announcements.Update(announcement);
 

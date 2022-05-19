@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace Itmo.Dormitory.API
 {
@@ -21,8 +22,13 @@ namespace Itmo.Dormitory.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DormitoryDbContext>(
-                o => o.UseSqlite($"Data Source={@"D:\STUDY\test.db"}")); // I will definitely remove it.Some day.
+            var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+            /*
+            services.AddDbContext<DormitoryDbContext>(o =>
+                 o.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+            */
+            services.AddDbContext<DormitoryDbContext>(o =>
+                o.UseNpgsql(connectionString));
             services.AddControllers(options => options.Filters.Add(new GlobalExceptionFilter()));
             services.AddCoreModule();
             services.AddIdentity<IdentityUser, IdentityRole>()

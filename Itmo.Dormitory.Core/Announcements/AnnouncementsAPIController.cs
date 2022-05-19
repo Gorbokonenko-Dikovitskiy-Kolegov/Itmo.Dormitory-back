@@ -19,7 +19,6 @@ namespace Itmo.Dormitory.Core.Announcements
             _mediator = mediator;
         }
 
-
         /// <summary>
         /// Создать новое объявление
         /// </summary>
@@ -33,7 +32,6 @@ namespace Itmo.Dormitory.Core.Announcements
             return await _mediator.Send(command);
         }
 
-
         /// <summary>
         /// Изменить существующее объявление
         /// </summary>
@@ -43,6 +41,7 @@ namespace Itmo.Dormitory.Core.Announcements
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+
         [HttpPut("edit")]
         public async Task<ActionResult<EditAnnouncement.Response>> EditAnnouncement(EditAnnouncement.Command command)
         {

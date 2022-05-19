@@ -54,11 +54,13 @@ namespace Itmo.Dormitory.Core.Announcements.Commands
                     Guid.NewGuid(),
                     new DateTime(request.CreateTime.Year, request.CreateTime.Month,
                                  request.CreateTime.Day, request.CreateTime.Hour, 
-                                 request.CreateTime.Minute, request.CreateTime.Second),
+                                 request.CreateTime.Minute, request.CreateTime.Second,
+                                 DateTimeKind.Utc),
 
                     new DateTime(request.CreateTime.Year, request.CreateTime.Month, 
                                  request.CreateTime.Day, request.CreateTime.Hour,
-                                 request.CreateTime.Minute, request.CreateTime.Second),
+                                 request.CreateTime.Minute, request.CreateTime.Second,
+                                 DateTimeKind.Utc),
 
                     new AttachedInformation(
                         request.Title, 
