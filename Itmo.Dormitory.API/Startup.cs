@@ -37,11 +37,14 @@ namespace Itmo.Dormitory.API
                 .AddUserManager<UserManager<IdentityUser>>()
                 .AddSignInManager<SignInManager<IdentityUser>>();
 
+            services.AddSignalR();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
+        {          
             app.UseRouting();
+            app.UseAuthorization();
+            app.UseAuthentication();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }

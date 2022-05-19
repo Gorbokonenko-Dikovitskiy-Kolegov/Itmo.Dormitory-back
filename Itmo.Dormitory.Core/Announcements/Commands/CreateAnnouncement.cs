@@ -1,9 +1,11 @@
 ﻿using FluentValidation;
+using Itmo.Dormitory.Core.SignalR;
 using Itmo.Dormitory.DataAccess;
 using Itmo.Dormitory.Domain.Entities;
 using Itmo.Dormitory.Domain.ValueObjects;
 using JetBrains.Annotations;
 using MediatR;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -38,10 +40,12 @@ namespace Itmo.Dormitory.Core.Announcements.Commands
         public class CommandHandler : IRequestHandler<Command, Response>
         {
             private readonly DormitoryDbContext _dormitoryDbContext;
+            private readonly IHubContext<DormitoryHub> _hubContext;
 
-            public CommandHandler(DormitoryDbContext dormitoryDbContext)
+            public CommandHandler(DormitoryDbContext dormitoryDbContext, IHubContext<DormitoryHub> hubContext)
             {
                 _dormitoryDbContext = dormitoryDbContext;
+                _hubContext = hubContext;
             }
 
             public async Task<Response> Handle(Command request, CancellationToken cancellationToken)
@@ -64,7 +68,12 @@ namespace Itmo.Dormitory.Core.Announcements.Commands
 
                 await _dormitoryDbContext.Announcements.AddAsync(announcement, cancellationToken);
 
-                await _dormitoryDbContext.SaveChangesAsync(cancellationToken);
+                int savedEnitites = await _dormitoryDbContext.SaveChangesAsync(cancellationToken);
+
+                if (savedEnitites != 0)
+                {
+                    await _hubContext.Clients.All.SendAsync("Notify", $"{announcement.Information.Title}", cancellationToken: cancellationToken);
+                }                  
 
                 return new Response(announcement.Id, announcement.LastUpdateTime, announcement.Information.Title);
             }
