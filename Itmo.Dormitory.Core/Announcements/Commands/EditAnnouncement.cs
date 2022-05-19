@@ -53,7 +53,9 @@ namespace Itmo.Dormitory.Core.Announcements.Commands
                 var announcement = await _dormitoryDbContext.Announcements.SingleOrDefaultAsync(t => t.Id == request.Id, cancellationToken);
 
                 if (announcement is null)
+                {
                     throw new EntityNotFoundException($"Announcement with Id {request.Id} not found");
+                }                    
 
                 announcement.Information = new AttachedInformation(request.Title, request.Description);
                 announcement.LastUpdateTime = new DateTime(request.LastUpdateTime.Year, request.LastUpdateTime.Month,

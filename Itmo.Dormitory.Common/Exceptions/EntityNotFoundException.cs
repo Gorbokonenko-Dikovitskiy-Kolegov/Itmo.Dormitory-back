@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 
 namespace Itmo.Dormitory.Common.Exceptions
 {
-    public class EntityNotFoundException : Exception
+    public class EntityNotFoundException : Exception , IBaseException
     {
         public EntityNotFoundException()
         {
@@ -17,5 +18,7 @@ namespace Itmo.Dormitory.Common.Exceptions
             : base(message, innerException)
         {
         }
+
+        public int StatusCode { get; } = StatusCodes.Status422UnprocessableEntity;
     }
 }
