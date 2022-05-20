@@ -1,0 +1,35 @@
+@{
+    ViewData["Title"] = "MyReservations";
+}
+
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <title>MyReservations</title>
+</head>
+<body>
+<header>
+    <h1 class="room__header">Результат:</h1>
+</header>
+<div>
+    @if (ViewBag.Reservations.Count != 0)
+    {
+        <p>Ваши бронирования:</p>
+        @foreach (var item in ViewBag.Reservations)
+        {
+            <div class="reservation">
+                <p>@item.RoomName</p>
+                <p>@item.Starts</p>
+                <button class="reserve" onclick="location.href='@Url.Action("CancelReservation", "Reservation", new {id = @item.Id})'">Отменить</button>
+            </div>
+        }
+    }
+    @if (ViewBag.Reservations.Count == 0)
+    {
+        <p>Кажется у вас нет зарезервированных слотов</p>
+    }
+    <button class="back" onclick="location.href='@Url.Action("Index", "Reservation")'">Назад</button>
+</div>
+</body>
+</html>
