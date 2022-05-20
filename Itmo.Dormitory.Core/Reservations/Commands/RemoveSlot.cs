@@ -3,18 +3,16 @@ using System.Threading;
 using System.Threading.Tasks;
 using Itmo.Dormitory.DataAccess;
 using MediatR;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Itmo.Dormitory.Core.Reservations.Commands
 {
-    [ApiExplorerSettings(GroupName = "Reservations")]
-    public class Remove : ControllerBase
+    public static class RemoveSlot
     {
         public record Command(int Id) : IRequest<Unit>;
 
 
-        public class Handler : IRequestHandler<Command, Unit>
+        public class Handler : IRequestHandler<Command>
         {
             private readonly DormitoryDbContext _db;
 

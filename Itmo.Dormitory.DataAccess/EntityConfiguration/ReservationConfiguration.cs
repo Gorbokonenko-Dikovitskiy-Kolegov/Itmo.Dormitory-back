@@ -13,5 +13,6 @@ public class ReservationConfiguration : IEntityTypeConfiguration<Reservation>
         builder.Property(r => r.RoomName);
         builder.Property(r => r.Starts);
         builder.Property(r => r.Reserved);
+        builder.Property(r => r.Owner);
     }
 }

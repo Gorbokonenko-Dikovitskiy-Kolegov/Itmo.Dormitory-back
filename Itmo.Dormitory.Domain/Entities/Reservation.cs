@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,4 +13,5 @@ public class Reservation
     public string RoomName { get; init; }
     public DateTime Starts { get; init; }
     public bool Reserved { get; set; }
+    public string? Owner { get; set; }
 }

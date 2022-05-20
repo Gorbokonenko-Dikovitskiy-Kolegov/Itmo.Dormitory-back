@@ -2,18 +2,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using FluentValidation;
 using Itmo.Dormitory.DataAccess;
 using Itmo.Dormitory.Domain.Entities;
+using Itmo.Dormitory.Web.Models;
 using MediatR;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Itmo.Dormitory.Core.Reservations.Queries
 {
-    [ApiExplorerSettings(GroupName = "Reservations")]
-    public class GetAvailableSlots : ControllerBase
+    public static class GetAvailableSlots
     {
         public record Query(string RoomName) : IListRequest<Result>;
+        
+        public class Validator : AbstractValidator<Query>
+        {
+            public Validator()
+            {
+                RuleFor(x => x.RoomName).NotEmpty();
+                RuleFor(x => x.RoomName).InRange(RoomName.All);
+            }
+        }
 
         public record Result : IListResponse<Reservation>
         {
@@ -32,7 +41,8 @@ namespace Itmo.Dormitory.Core.Reservations.Queries
             {
                 var reservations = await _db.Reservations
                     .Where(r => r.RoomName == query.RoomName)
-                    .Where(r => r.Reserved == false).ToListAsync(cancellationToken);
+                    .Where(r => r.Reserved == false)
+                    .ToListAsync(cancellationToken);
 
                 return new Result
                 {

@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using Itmo.Dormitory.Core.Reservations.Commands;
 using Itmo.Dormitory.Core.Reservations.Queries;
@@ -18,28 +17,43 @@ namespace Itmo.Dormitory.Core.Reservations
             _mediator = mediator;
         }
         
-        [HttpGet("get-list/{roomName}")]
+        [HttpGet("get-available-slots/{roomName}")]
         public async Task<GetAvailableSlots.Result> GetAvailableSlots(string roomName)
         {
             return await _mediator.Send(new GetAvailableSlots.Query(roomName));
         }
         
-        [HttpPut("reserve-slot/{id}")]
-        public async Task<bool> ReserveSlot(int id)
+        [HttpGet("get-list-by-owner/{isuNumber}")]
+        public async Task<ActionResult> GetReservationsByOwner(string isuNumber)
         {
-            return await _mediator.Send(new Reserve.Command(id));
+            await _mediator.Send(new GetReservationsByOwner.Query(isuNumber));
+            return Ok();
         }
         
-        [HttpPost("create-slot/{roomName}/{starts}")]
-        public async Task CreateSlot(string roomName, DateTime starts)
+        [HttpPut("reserve-slot")]
+        public async Task<Reserve.Result> ReserveSlot(Reserve.Command command)
         {
-            await _mediator.Send(new Create.Command(roomName, starts));
+            return await _mediator.Send(command);
+        }
+        
+        [HttpPut("cancel-reservation/{id}")]
+        public async Task<ActionResult> ReserveSlot(int id)
+        {
+            await _mediator.Send(new CancelReservation.Command(id));
+            return Ok();
+        }
+        
+        [HttpPost("create-slot")]
+        public async Task<ActionResult<CreateSlot.Response>> CreateSlot(CreateSlot.Command command)
+        {
+            return await _mediator.Send(command);
         }
         
         [HttpPost("remove-slot/{id}")]
-        public async Task RemoveSlot(int id)
+        public async Task<ActionResult> RemoveSlot(int id)
         {
-            await _mediator.Send(new Remove.Command(id));
+            await _mediator.Send(new RemoveSlot.Command(id));
+            return Ok();
         }
     }
 }
