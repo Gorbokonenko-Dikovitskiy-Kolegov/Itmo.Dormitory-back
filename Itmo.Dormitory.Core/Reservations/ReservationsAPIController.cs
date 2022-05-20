@@ -24,20 +24,19 @@ namespace Itmo.Dormitory.Core.Reservations
         }
         
         [HttpGet("get-list-by-owner/{isuNumber}")]
-        public async Task<ActionResult> GetReservationsByOwner(string isuNumber)
+        public async Task<GetReservationsByOwner.Result> GetReservationsByOwner(string isuNumber)
         {
-            await _mediator.Send(new GetReservationsByOwner.Query(isuNumber));
-            return Ok();
+            return await _mediator.Send(new GetReservationsByOwner.Query(isuNumber));
         }
         
         [HttpPut("reserve-slot")]
-        public async Task<Reserve.Result> ReserveSlot(Reserve.Command command)
+        public async Task<ReserveSlot.Result> ReserveSlot(ReserveSlot.Command command)
         {
             return await _mediator.Send(command);
         }
         
         [HttpPut("cancel-reservation/{id}")]
-        public async Task<ActionResult> ReserveSlot(int id)
+        public async Task<ActionResult> CancelReservation(int id)
         {
             await _mediator.Send(new CancelReservation.Command(id));
             return Ok();

@@ -1,0 +1,27 @@
+@{
+    ViewData["Title"] = "CancelReservation";
+}
+
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <title>CancelReservation</title>
+</head>
+<body>
+<header>
+    <h1 class="room__header">Результат:</h1>
+</header>
+<div>
+    @if (ViewBag.Success)
+    {
+        <p>Бронирование успешно отменено</p>
+    }
+    @if (!ViewBag.Success)
+    {
+        <p>Что-то пошло не так, попробуйте еще раз :(</p>
+    }
+    <button class="reserve" onclick="location.href='@Url.Action("Index", "Reservation")'">Назад</button>
+</div>
+</body>
+</html>

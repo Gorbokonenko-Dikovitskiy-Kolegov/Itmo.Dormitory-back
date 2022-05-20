@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Itmo.Dormitory.Core.Reservations.Commands
 {
-    public static class Reserve
+    public static class ReserveSlot
     {
         public record Command(int Id, string ISUNumber) : IListRequest<Result>;
         

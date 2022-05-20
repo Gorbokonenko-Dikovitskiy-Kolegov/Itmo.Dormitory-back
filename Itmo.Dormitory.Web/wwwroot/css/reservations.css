@@ -53,10 +53,11 @@ body {
 
 /*button*/
 .reserve {
-    width: 300px;
+    /*width: 300px;*/
+    width: 100%;
     height: 50px;
     text-align: center;
-    border-radius: 25px;
+    /*border-radius: 25px;*/
     font-size: 15px;
 
     color: #494949 !important;
@@ -71,4 +72,44 @@ body {
     background: #F21F5B;
     border-color: #F21F5B !important;
     transition: all 0.4s ease 0s;
+}
+
+.slot {
+    background-color: #86cfda;
+    width: 50%;
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    margin-bottom: 5%;
+}
+
+.back {
+    width: 50%;
+    height: 50px;
+    margin-top: 5%;
+
+    font-size: 15px;
+
+    color: #494949 !important;
+    background: #ffffff;
+    border: 2px solid #494949 !important;
+    transition: all 0.4s ease 0s;
+}
+
+.back:hover {
+    color: #ffffff !important;
+    background: #F21F5B;
+    border-color: #F21F5B !important;
+    transition: all 0.4s ease 0s;
+}
+
+.reservation {
+    border: 2px solid #494949;
+    width: 50%;
+    height: 150px;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    margin-bottom: 5%;
 }

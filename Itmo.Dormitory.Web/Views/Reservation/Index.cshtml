@@ -29,6 +29,8 @@
         <img class="rooms__img" src="images/study_room.jpg" alt="study"/>
         <p class="rooms__text" onclick="location.href='@Url.Action("Reserve","Reservation", new {roomName = "study"})'">Учебка</p>
     </section>
+        
+    <button class="back" style="width: 90%" onclick="location.href='@Url.Action("MyReservations", "Reservation")'">Мои бронирования</button>
 </div>
 </body>
 </html>
