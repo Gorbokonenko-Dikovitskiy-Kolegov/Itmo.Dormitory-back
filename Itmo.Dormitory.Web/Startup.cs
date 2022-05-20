@@ -9,7 +9,6 @@ using Itmo.Dormitory.Core;
 using Itmo.Dormitory.Core.Announcements;
 using Itmo.Dormitory.Core.Reservations;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using Itmo.Dormitory.Core.SignalR;
 
@@ -27,12 +26,15 @@ namespace Itmo.Dormitory.Web
         public void ConfigureServices(IServiceCollection services)
         {
             var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+            
+            services.AddDbContext<DormitoryDbContext>(o =>
+                  o.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+             
             /*
             services.AddDbContext<DormitoryDbContext>(o =>
-                 o.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
-            */
-            services.AddDbContext<DormitoryDbContext>(o =>
                 o.UseNpgsql(connectionString));
+            */
+
             services.AddControllersWithViews();
             services.AddScoped<AnnouncementsAPIController>();
             services.AddScoped<ReservationsAPIController>();
