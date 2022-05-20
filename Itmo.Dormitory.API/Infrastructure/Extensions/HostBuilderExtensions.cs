@@ -4,6 +4,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Itmo.Dormitory.API.Infrastructure.StartupFilters;
+using System;
+using System.Reflection;
+using System.IO;
+using System.Linq;
+using Itmo.Dormitory.API.Infrastructure.Authentification;
 
 namespace Itmo.Dormitory.API.Infrastructure.Extensions
 {
@@ -18,7 +23,28 @@ namespace Itmo.Dormitory.API.Infrastructure.Extensions
 
                 services.AddSwaggerGen(options =>
                 {
-                    options.SwaggerDoc("v1", new OpenApiInfo { Title = "Itmo.Dormitory.API", Version = "v1" });
+                    options.SwaggerDoc("v1", new OpenApiInfo
+                    {
+                        Version = "v1",
+                        Title = "Dormitory API",
+                        Description = "Here you can manage the Dormitory",
+                        Contact = new OpenApiContact
+                        {
+                            Name = "О возникших проблемах можно сообщить здесь",
+                            Url = new Uri("https://github.com/Gorbokonenko-Dikovitskiy-Kolegov/Itmo.Dormitory-back/issues")
+                        }
+                    });
+
+                    var currentAssembly = Assembly.GetExecutingAssembly();
+                    var xmlDocs = currentAssembly.GetReferencedAssemblies()
+                    .Union(new AssemblyName[] { currentAssembly.GetName() })
+                    .Select(a => Path.Combine(Path.GetDirectoryName(currentAssembly.Location), $"{a.Name}.xml"))
+                    .Where(f => File.Exists(f)).ToArray();
+
+                    Array.ForEach(xmlDocs, (d) =>
+                    {
+                        options.IncludeXmlComments(d);
+                    });
 
                     options.CustomSchemaIds(selector =>
                     {
@@ -34,6 +60,18 @@ namespace Itmo.Dormitory.API.Infrastructure.Extensions
                         typeNames.Reverse();
                         return string.Join(".", typeNames);
                     });
+
+                    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                    {
+                        In = ParameterLocation.Header,
+                        Description = "Please enter token",
+                        Name = "Authorization",
+                        Type = SecuritySchemeType.Http,
+                        BearerFormat = "JWT",
+                        Scheme = "bearer"
+                    });
+
+                    options.OperationFilter<AuthResponsesOperationFilter>();
                 });
             });
 

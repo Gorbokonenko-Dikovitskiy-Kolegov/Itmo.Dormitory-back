@@ -8,7 +8,7 @@ namespace Itmo.Dormitory.DataAccess
     {
         public DormitoryDbContext(DbContextOptions options) : base(options)
         {
-            Database.EnsureCreated();
+
         }
 
         public DbSet<Resident> Residents { get; set; } = null!;

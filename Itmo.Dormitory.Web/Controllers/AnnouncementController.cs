@@ -3,6 +3,7 @@ using Itmo.Dormitory.Core.Announcements;
 using Itmo.Dormitory.Core.Announcements.Commands;
 using Itmo.Dormitory.Core.Announcements.Queries;
 using Itmo.Dormitory.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Itmo.Dormitory.Controllers
 {
+    [Authorize]
     public class AnnouncementController : Controller
     {
         private readonly AnnouncementsAPIController _announcementsAPIController;

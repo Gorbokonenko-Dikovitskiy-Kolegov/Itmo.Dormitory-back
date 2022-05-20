@@ -56,7 +56,7 @@ namespace Itmo.Dormitory.Core.Users.Commands
                     await _userManager.AddToRoleAsync(user, "User");
                 }
 
-                return new Response(result.Succeeded ? user.Id : "Fail");
+                return new Response(user.Id);
             }
         }
     }

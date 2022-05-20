@@ -1,9 +1,11 @@
-﻿using Itmo.Dormitory.Core.Reservations;
+using Itmo.Dormitory.Core.Reservations;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
 namespace Itmo.Dormitory.Controllers
 {
+    [Authorize]
     public class ReservationController : Controller
     {
         private readonly ReservationsAPIController _controller;

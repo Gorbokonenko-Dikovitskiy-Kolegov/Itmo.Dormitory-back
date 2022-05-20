@@ -16,7 +16,10 @@ namespace Itmo.Dormitory.Core.Roles
         {
             _mediator = mediator;
         }
-   
+
+        /// <summary>
+        /// Создать роль
+        /// </summary>
         [HttpPost("create-role")]
         public async Task<ActionResult<CreateRole.Response>> CreateRole(CreateRole.Command command)
         {

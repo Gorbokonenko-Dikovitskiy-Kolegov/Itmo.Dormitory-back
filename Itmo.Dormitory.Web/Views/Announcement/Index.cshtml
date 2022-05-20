@@ -1,4 +1,4 @@
-﻿@model List<Announcement>
+@model List<Announcement>
 @{
     ViewData["Title"] = "Announcements";
 }
@@ -56,7 +56,10 @@
             <div class="rectangle"></div>
         </aside>
         <section class="filter-container">
-          <a class="create-button" href="#CreateForm">Создать объявление</a>
+            @if (this.User.IsInRole("Admin"))
+            {
+                <a class="create-button" href="#CreateForm">Создать объявление</a>
+            }          
           <div class="filter-box">
             <div class="search-box">
                 <img src ="~/images/magnifier.png" style="width: 10%; height: 10%">

@@ -9,6 +9,9 @@ using Itmo.Dormitory.Core;
 using Itmo.Dormitory.Core.Announcements;
 using Itmo.Dormitory.Core.Reservations;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using System;
+using Itmo.Dormitory.Core.SignalR;
 
 namespace Itmo.Dormitory.Web
 {
@@ -23,17 +26,33 @@ namespace Itmo.Dormitory.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DormitoryDbContext>(
-                o => o.UseSqlite(Configuration["ConnectionString"]));
+            var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+            /*
+            services.AddDbContext<DormitoryDbContext>(o =>
+                 o.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+            */
+            services.AddDbContext<DormitoryDbContext>(o =>
+                o.UseNpgsql(connectionString));
             services.AddControllersWithViews();
             services.AddScoped<AnnouncementsAPIController>();
             services.AddScoped<ReservationsAPIController>();
             services.AddCoreModule();
+
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<DormitoryDbContext>()
                 .AddDefaultTokenProviders()
                 .AddUserManager<UserManager<IdentityUser>>()
                 .AddSignInManager<SignInManager<IdentityUser>>();
+
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Account/Index";
+                options.AccessDeniedPath = "/Account/Index";
+            });
+
+            services.AddSignalR();
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -60,6 +79,11 @@ namespace Itmo.Dormitory.Web
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Account}/{action=Index}");
+            });
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapHub<DormitoryHub>("/dormitory");
             });
         }
     }

@@ -6,13 +6,25 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Itmo.Dormitory</title>
-    <!--<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> -->
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/nav-bar.css" />
+    <script src="~/js/signalr/dist/browser/signalr.min.js"></script>
+    <script src="~/js/signalR-announcement.js"></script>
+    <link rel="stylesheet" href="~/css/announcement-notification.css" />
 </head>
 <body>
     <header>
-        <div class="menu">
+        <div class="menu">          
+            
+            <div class="logout-container">  
+	            <a class="logout-button"  asp-area="" asp-controller="Account" asp-action="Logout" >
+  	                <img class="user-pic" src="https://pbs.twimg.com/profile_images/378800000639740507/fc0aaad744734cd1dbc8aeb3d51f8729_400x400.jpeg">  
+                    <div class="logout">LOGOUT</div>
+	            </a>  
+            </div>
+
+            <div id="toast"><img id="img" src="~/images/Announcement.png"/><div id="desc">Появилось новое объявление</div></div>
+
             <img id ="itmo-logo" src="~/images/ItmoLogo.png" style="margin: 15% 0 0 0"/>
             <ul class="navbar">
                 <li class="navbar-item" id="announcements">
@@ -37,28 +49,6 @@
                     </a>
                 </li>
             </ul>
-            <!--
-    <div class="container">
-        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Itmo.Dormitory</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-            <ul class="navbar-nav flex-grow-1">
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Announcement" asp-action="Index">Объявления</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Application" asp-action="Index">Заявления</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Reservation" asp-action="Index">Бронирование комнат</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-        -->
         </div>
     </header>
     <div class="container">

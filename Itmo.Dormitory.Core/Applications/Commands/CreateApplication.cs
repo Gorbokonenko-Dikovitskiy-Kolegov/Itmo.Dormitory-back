@@ -62,7 +62,8 @@ namespace Itmo.Dormitory.Core.Applications.Commands
                     Guid.NewGuid(),
                     new DateTime(request.LastUpdateTime.Year, request.LastUpdateTime.Month,
                                  request.LastUpdateTime.Day, request.LastUpdateTime.Hour,
-                                 request.LastUpdateTime.Minute, request.LastUpdateTime.Second),
+                                 request.LastUpdateTime.Minute, request.LastUpdateTime.Second,
+                                 DateTimeKind.Utc),
                     request.ApplicationType,
                     new AttachedInformation(request.Title, request.Description),
                     resident

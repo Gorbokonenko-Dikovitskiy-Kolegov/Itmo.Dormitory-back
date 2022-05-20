@@ -20,11 +20,17 @@ namespace Itmo.Dormitory.Core.Users
             _mediator = mediator;
         }
 
+        /// <summary>
+        /// Создать пользователя сайта
+        /// </summary>
         [HttpPost("create-user")]
         public async Task<ActionResult<CreateUser.Response>> CreateUser(CreateUser.Command command)
         {
             return await _mediator.Send(command);
         }
+        /// <summary>
+        /// Создать управляющего
+        /// </summary>
         [HttpPost("create-admin")]
         public async Task<ActionResult<CreateAdmin.Response>> CreateAdmin(CreateAdmin.Command command)
         {

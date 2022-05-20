@@ -18,6 +18,8 @@ namespace Itmo.Dormitory.Controllers
 
         public IActionResult Index()
         {
+            if(_signInManager.IsSignedIn(User))
+                return RedirectToAction("Index", "Announcement");
             return View();
         }
 
@@ -33,10 +35,10 @@ namespace Itmo.Dormitory.Controllers
         {
             if (ModelState.IsValid)
             {
+                await _signInManager.SignOutAsync();
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
                 if (result.Succeeded)
                 {
-                    await _signInManager.SignOutAsync();
                     // проверяем, принадлежит ли URL приложению
                     if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
                     {
@@ -68,10 +70,10 @@ namespace Itmo.Dormitory.Controllers
         {
             if (ModelState.IsValid)
             {
+                await _signInManager.SignOutAsync();
                 var result = await _signInManager.PasswordSignInAsync(model.Isu, model.Password, model.RememberMe, false);
                 if (result.Succeeded)
                 {
-                    await _signInManager.SignOutAsync();
                     // проверяем, принадлежит ли URL приложению
                     if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
                     {
@@ -90,13 +92,10 @@ namespace Itmo.Dormitory.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
-            // удаляем аутентификационные куки
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return View("Index");
         }
     }
 }
