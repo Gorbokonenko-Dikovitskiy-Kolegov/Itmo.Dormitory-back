@@ -1,0 +1,34 @@
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using Itmo.Dormitory.DataAccess;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+
+namespace Itmo.Dormitory.Core.Reservations.Commands
+{
+    public static class RemoveSlot
+    {
+        public record Command(int Id) : IRequest<Unit>;
+
+
+        public class Handler : IRequestHandler<Command>
+        {
+            private readonly DormitoryDbContext _db;
+
+            public Handler(DormitoryDbContext db) => _db = db;
+
+            public async Task<Unit> Handle(Command command, CancellationToken cancellationToken)
+            {
+                var reservation = await _db.Reservations
+                    .Where(r => r.Id == command.Id)
+                    .SingleAsync(cancellationToken);
+
+                _db.Reservations.Remove(reservation);
+                await _db.SaveChangesAsync(cancellationToken);
+
+                return Unit.Value;
+            }
+        }
+    }
+}

@@ -1,0 +1,44 @@
+@{
+    ViewData["Title"] = "Reserve";
+}
+
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <title>Reserve</title>
+    <link rel="stylesheet" href="css/reservations.css">
+</head>
+<body>
+<header>
+    <h1 class="room__header">Выберете доступный слот:</h1>
+</header>
+<div>
+    @if (ViewBag.Slots.Count != 0)
+    {
+        @foreach (var item in ViewBag.Slots)
+        {
+            <div>
+                <div class="slot" style="background-color: #3dd28d; 
+                                        width: 50%; 
+                                        height: 50px; 
+                                        text-align: center; 
+                                        vertical-align: middle; 
+                                        display: inline-block;">
+                    <button style="width: 100%; height: 100%" onclick="location.href='@Url.Action("Reserved","Reservation", new {id = @item.Id})'">@item.Starts</button>
+                </div>
+            </div>
+        }
+    }
+    @if (ViewBag.Slots.Count == 0)
+    {
+        <div>
+            <p>Ничего не нашлось :(</p>
+        </div>
+    }
+    <button onclick="location.href='@Url.Action("Index", "Reservation")'" style="margin-top: 5%">Назад</button>
+</div>
+</body>
+</html>
+
+

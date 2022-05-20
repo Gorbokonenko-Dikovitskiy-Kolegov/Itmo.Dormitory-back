@@ -22,17 +22,17 @@ namespace Itmo.Dormitory.Controllers
 
         public IActionResult Announcements()
         {
-            return View();
+            return RedirectToAction("Index", "Announcement");
         }
 
         public IActionResult Applications()
         {
-            return View();
+            return RedirectToAction("Index", "Application");
         }
 
-        public IActionResult Booking()
+        public IActionResult Reservations()
         {
-            return View();
+            return RedirectToAction("Index", "Reservation");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Itmo.Dormitory.DataAccess;
 using Itmo.Dormitory.Core;
 using Itmo.Dormitory.Core.Announcements;
+using Itmo.Dormitory.Core.Reservations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
@@ -34,6 +35,7 @@ namespace Itmo.Dormitory.Web
                 o.UseNpgsql(connectionString));
             services.AddControllersWithViews();
             services.AddScoped<AnnouncementsAPIController>();
+            services.AddScoped<ReservationsAPIController>();
             services.AddCoreModule();
 
             services.AddIdentity<IdentityUser, IdentityRole>()
