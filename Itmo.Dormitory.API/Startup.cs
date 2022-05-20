@@ -22,13 +22,10 @@ namespace Itmo.Dormitory.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
-            /*
             services.AddDbContext<DormitoryDbContext>(o =>
-                 o.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
-            */
-            services.AddDbContext<DormitoryDbContext>(o =>
-                o.UseNpgsql(connectionString));
+                o.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            // services.AddDbContext<DormitoryDbContext>(
+            //     o => o.UseSqlite(Configuration["ConnectionString"]));
             services.AddControllers(options => options.Filters.Add(new GlobalExceptionFilter()));
             services.AddCoreModule();
             services.AddIdentity<IdentityUser, IdentityRole>()

@@ -26,13 +26,11 @@ namespace Itmo.Dormitory.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
-            /*
             services.AddDbContext<DormitoryDbContext>(o =>
-                 o.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+                o.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            /*services.AddDbContext<DormitoryDbContext>(
+                o => o.UseSqlite(Configuration["ConnectionString"]));
             */
-            services.AddDbContext<DormitoryDbContext>(o =>
-                o.UseNpgsql(connectionString));
             services.AddControllersWithViews();
             services.AddScoped<AnnouncementsAPIController>();
             services.AddScoped<ReservationsAPIController>();

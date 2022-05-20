@@ -27,13 +27,13 @@ namespace Itmo.Dormitory.Controllers
         
         public IActionResult Reserved(int id)
         {
-            ViewBag.Success = _controller.ReserveSlot(new ReserveSlot.Command(id, "281704")).Result.ReserveSuccessful;
+            ViewBag.Success = _controller.ReserveSlot(new ReserveSlot.Command(id, User.Identity.Name)).Result.ReserveSuccessful;
             return View();
         }
         
         public IActionResult MyReservations()
         {
-            ViewBag.Reservations = _controller.GetReservationsByOwner("281704").Result.Results;
+            ViewBag.Reservations = _controller.GetReservationsByOwner(User.Identity.Name).Result.Results;
             return View();
         }
         
