@@ -1,3 +1,4 @@
+@using System.Diagnostics.Eventing.Reader
 @{
     ViewData["Title"] = "Reserve";
 }
@@ -12,10 +13,10 @@
 <header>
     <h1 class="room__header">Выберете доступный слот:</h1>
 </header>
-<div>
-    @if (ViewBag.Slots.Count != 0)
+<div class="all__container">
+    @if (ViewBag.Slots.Data.Count != 0)
     {
-        @foreach (var item in ViewBag.Slots)
+        @foreach (var item in ViewBag.Slots.Data)
         {
             <div>
                 <div class="slot">
@@ -24,12 +25,56 @@
             </div>
         }
     }
-    @if (ViewBag.Slots.Count == 0)
+    @if (ViewBag.Slots.Data.Count == 0)
     {
         <div>
             <p>Ничего не нашлось :(</p>
         </div>
     }
+    <div class="pagination">
+        @if (ViewBag.Slots.HasPreviousPage)
+        {
+            <a asp-action="Reserve" asp-controller="Reservation" asp-route-page="@(ViewBag.Page - 1)" asp-route-roomName="@ViewBag.RoomName">
+                <button>Предыдущая</button>
+            </a>
+        }
+        @if (!ViewBag.Slots.HasPreviousPage)
+        {
+            <a asp-action="Reserve" asp-controller="Reservation" asp-route-page="@(ViewBag.Page - 1)" asp-route-roomName="@ViewBag.RoomName">
+                <button disabled="disabled">Предыдущая</button>
+            </a>
+        }
+        @if (ViewBag.Slots.Pages > 1)
+        {
+            @for (int i = 1; i <= ViewBag.Slots.Pages; i++)
+            {
+                @if (i == ViewBag.Page)
+                {
+                    <a asp-action="Reserve" asp-controller="Reservation" asp-route-page="@i" asp-route-roomName="@ViewBag.RoomName">
+                        <button class="active-button" style="background-color: #F21F5B">@i</button>
+                    </a>
+                }
+                @if (i != ViewBag.Page)
+                {
+                    <a asp-action="Reserve" asp-controller="Reservation" asp-route-page="@i" asp-route-roomName="@ViewBag.RoomName">
+                        <button>@i</button>
+                    </a>
+                }
+            }
+        }
+        @if (ViewBag.Slots.HasNextPage)
+        {
+            <a asp-action="Reserve" asp-controller="Reservation" asp-route-page="@(ViewBag.Page + 1)" asp-route-roomName="@ViewBag.RoomName">
+                <button>Следующая</button>
+            </a>
+        }
+        @if (!ViewBag.Slots.HasNextPage)
+        {
+            <a asp-action="Reserve" asp-controller="Reservation" asp-route-page="@(ViewBag.Page + 1)" asp-route-roomName="@ViewBag.RoomName">
+                <button disabled="disabled">Следующая</button>
+            </a>
+        }
+    </div>
     <button class="back" onclick="location.href='@Url.Action("Index", "Reservation")'">Назад</button>
 </div>
 </body>

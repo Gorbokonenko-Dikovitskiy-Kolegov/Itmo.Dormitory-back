@@ -10,7 +10,7 @@ namespace Itmo.Dormitory.Core.Reservations.Commands
 {
     public static class ReserveSlot
     {
-        public record Command(int Id, string ISUNumber) : IListRequest<Result>;
+        public record Command(int Id, string ISUNumber) : IRequest<Result>;
         
         public class CommandValidator : AbstractValidator<Command>
         {

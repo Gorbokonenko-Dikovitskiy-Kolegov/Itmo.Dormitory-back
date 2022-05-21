@@ -19,9 +19,11 @@ namespace Itmo.Dormitory.Controllers
             return View();
         }
         
-        public IActionResult Reserve(string roomName)
+        public IActionResult Reserve(string roomName, int page = 1)
         {
-            ViewBag.Slots = _controller.GetAvailableSlots(roomName).Result.Results;
+            ViewBag.Page = page;
+            ViewBag.RoomName = roomName;
+            ViewBag.Slots = _controller.GetAvailableSlots(roomName, page).Result;
             return View();
         }
         
@@ -31,9 +33,10 @@ namespace Itmo.Dormitory.Controllers
             return View();
         }
         
-        public IActionResult MyReservations()
+        public IActionResult MyReservations(int page = 1)
         {
-            ViewBag.Reservations = _controller.GetReservationsByOwner(User.Identity.Name).Result.Results;
+            ViewBag.Page = page;
+            ViewBag.Reservations = _controller.GetReservationsByOwner(User.Identity.Name, page).Result;
             return View();
         }
         
