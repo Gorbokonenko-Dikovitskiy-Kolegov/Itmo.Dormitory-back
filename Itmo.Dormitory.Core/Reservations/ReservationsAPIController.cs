@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Itmo.Dormitory.Core.Reservations.Commands;
 using Itmo.Dormitory.Core.Reservations.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Itmo.Dormitory.Core.Reservations
@@ -16,38 +17,69 @@ namespace Itmo.Dormitory.Core.Reservations
         {
             _mediator = mediator;
         }
-        
+
+
+        /// <summary>
+        /// Получить доступные слоты записи
+        /// </summary>
+        /// <response code="400">Validation error</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [HttpPost("create")]
         [HttpGet("get-available-slots/{roomName}")]
         public async Task<GetAvailableSlots.Result> GetAvailableSlots(string roomName)
         {
             return await _mediator.Send(new GetAvailableSlots.Query(roomName));
         }
-        
+
+
+        /// <summary>
+        /// Получить забронированные пользователем комнаты
+        /// </summary>
+        /// <response code="400">Validation error</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpGet("get-list-by-owner/{isuNumber}")]
         public async Task<GetReservationsByOwner.Result> GetReservationsByOwner(string isuNumber)
         {
             return await _mediator.Send(new GetReservationsByOwner.Query(isuNumber));
         }
-        
+
+        /// <summary>
+        /// Зарезервировать слот
+        /// </summary>
+        /// <response code="400">Validation error</response>
         [HttpPut("reserve-slot")]
         public async Task<ReserveSlot.Result> ReserveSlot(ReserveSlot.Command command)
         {
             return await _mediator.Send(command);
         }
-        
+
+        /// <summary>
+        /// Отменить резервацию
+        /// </summary>
+        /// <response code="400">Validation error</response>
         [HttpPut("cancel-reservation/{id}")]
         public async Task<ActionResult> CancelReservation(int id)
         {
             await _mediator.Send(new CancelReservation.Command(id));
             return Ok();
         }
-        
+        /// <summary>
+        /// Создать слот записи
+        /// </summary>
+        /// <response code="400">Validation error</response>
         [HttpPost("create-slot")]
         public async Task<ActionResult<CreateSlot.Response>> CreateSlot(CreateSlot.Command command)
         {
             return await _mediator.Send(command);
         }
-        
+        /// <summary>
+        /// Удалить слот записи
+        /// </summary>
+        /// <response code="400">Validation error</response>
         [HttpPost("remove-slot/{id}")]
         public async Task<ActionResult> RemoveSlot(int id)
         {
