@@ -6,3 +6,16 @@ website: [itmodormitoryweb](https://itmodormitoryweb.azurewebsites.net/)
 
 ### ERD diagram
 ![image](https://user-images.githubusercontent.com/71635718/169645683-88ba109b-886e-4176-95e5-e0d70dcbc376.png)
+
+### Использованные технологии:
+  - ASP.net
+  - SignalR
+  - MediatR
+  - AspNet.Identity
+  - Паттерн CQRS
+  - JWT tokens
+  - Swagger
+  - EF.Core
+  - Azure
+  - Microsoft SQL Server
+  - Skip and Take 
