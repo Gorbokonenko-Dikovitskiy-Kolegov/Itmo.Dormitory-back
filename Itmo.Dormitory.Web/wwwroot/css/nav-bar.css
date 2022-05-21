@@ -28,7 +28,8 @@ body {
 }
 
 .user-pic {
-    width: 25px;
+    width: 35px;
+    height: 35px;
     border-radius: 50px;
     float: left;
 }
@@ -38,7 +39,7 @@ body {
     font-family: 'Oswald', sans-serif;
     position: relative;
     right: -18px;
-    bottom: -4px;
+    bottom: -8px;
     overflow: hidden;
     letter-spacing: 3px;
     opacity: 0;
@@ -49,7 +50,7 @@ body {
 .logout-button {
     text-decoration: none;
     float: right;
-    padding: 12px;
+    padding: 7px;
     margin: 15px;
     color: white;
     width: 50px;
