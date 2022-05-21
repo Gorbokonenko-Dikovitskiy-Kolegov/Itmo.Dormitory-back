@@ -1,23 +1,15 @@
 using System.Collections.Generic;
-using MediatR;
 
 namespace Itmo.Dormitory.Core
 {
-    public interface IListRequest
+    public class PagedResponse<T>
     {
-    }
+        public List<T> Data { get; set; } = new List<T>();
+        public int Pages { get; set; }
+        public int CurrentPage { get; set; }
+        
+        public bool HasPreviousPage => CurrentPage > 1;
 
-    public interface IListRequest<out T> : IListRequest, IRequest<T>
-    {
-    }
-
-    public interface IListResponse
-    {
-        public int Size { get; init; }
-    }
-
-    public interface IListResponse<TListItem> : IListResponse
-    {
-        public IList<TListItem> Results { get; init; }
+        public bool HasNextPage => CurrentPage < Pages;
     }
 }

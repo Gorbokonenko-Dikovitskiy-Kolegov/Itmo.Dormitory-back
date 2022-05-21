@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,7 +13,7 @@ namespace Itmo.Dormitory.Core.Reservations.Queries
 {
     public static class GetAvailableSlots
     {
-        public record Query(string RoomName) : IListRequest<Result>;
+        public record Query(string RoomName, int page) : IRequest<PagedResponse<Reservation>>;
         
         public class Validator : AbstractValidator<Query>
         {
@@ -24,30 +24,31 @@ namespace Itmo.Dormitory.Core.Reservations.Queries
             }
         }
 
-        public record Result : IListResponse<Reservation>
-        {
-            public int Size { get; init; }
-
-            public IList<Reservation> Results { get; init; } = new List<Reservation>();
-        }
-
-        public class Handler : IRequestHandler<Query, Result>
+        public class Handler : IRequestHandler<Query, PagedResponse<Reservation>>
         {
             private readonly DormitoryDbContext _db;
 
             public Handler(DormitoryDbContext db) => _db = db;
 
-            public async Task<Result> Handle(Query query, CancellationToken cancellationToken)
+            public async Task<PagedResponse<Reservation>> Handle(Query query, CancellationToken cancellationToken)
             {
-                var reservations = await _db.Reservations
+                var reservations = _db.Reservations
                     .Where(r => r.RoomName == query.RoomName)
-                    .Where(r => r.Reserved == false)
+                    .Where(r => r.Reserved == false);
+                
+                var pageResults = 4f;
+                var pageCount = Math.Ceiling(await reservations.CountAsync(cancellationToken) / pageResults);
+                var a = await reservations
+                    .OrderBy(r => r.Starts)
+                    .Skip((query.page - 1) * (int)pageResults)
+                    .Take((int)pageResults)
                     .ToListAsync(cancellationToken);
 
-                return new Result
+                return new PagedResponse<Reservation>()
                 {
-                    Size = reservations.Count,
-                    Results = reservations
+                    Data = a, 
+                    CurrentPage = query.page, 
+                    Pages = (int) pageCount
                 };
             }
         }
