@@ -51,7 +51,7 @@
                 @if (i == ViewBag.Page)
                 {
                     <a asp-action="Reserve" asp-controller="Reservation" asp-route-page="@i" asp-route-roomName="@ViewBag.RoomName">
-                        <button class="active-button" style="background-color: #F21F5B">@i</button>
+                        <button class="active-button" style="background-color: #dc2064; color: white;">@i</button>
                     </a>
                 }
                 @if (i != ViewBag.Page)

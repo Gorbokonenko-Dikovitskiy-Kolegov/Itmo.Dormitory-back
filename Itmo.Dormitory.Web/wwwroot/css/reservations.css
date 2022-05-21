@@ -140,9 +140,9 @@ body {
     border: 0px;
 }
 
-.pagination button.active {
-    background-color: #4CAF50;
-    color: white;
-}
+    .pagination button.active {
+        background-color: #dc2064;
+        color: white;
+    }
 
 .pagination button:hover:not(.active) {background-color: #ddd;}
