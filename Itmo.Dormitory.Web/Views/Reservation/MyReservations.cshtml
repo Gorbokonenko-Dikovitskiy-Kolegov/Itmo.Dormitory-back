@@ -10,12 +10,11 @@
 </head>
 <body>
 <header>
-    <h1 class="room__header">Результат:</h1>
+    <h1 class="room__header">Ваши бронирования</h1>
 </header>
 <div>
     @if (ViewBag.Reservations.Count != 0)
     {
-        <p>Ваши бронирования:</p>
         @foreach (var item in ViewBag.Reservations)
         {
             <div class="reservation">

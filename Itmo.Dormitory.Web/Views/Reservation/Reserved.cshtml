@@ -10,12 +10,11 @@
 </head>
 <body>
 <header>
-    <h1 class="room__header">Результат:</h1>
 </header>
 <div>
     @if (ViewBag.Success)
     {
-        <p>Слот успешно зарезервирован</p>
+        <p class="room__header">Слот успешно зарезервирован</p>
     }
     @if (!ViewBag.Success)
     {
