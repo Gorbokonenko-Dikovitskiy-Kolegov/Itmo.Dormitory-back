@@ -152,7 +152,7 @@ body {
 .mycontainer {
 }
 
-form {
+.mycontainer form {
     display: flex;
     flex-direction: column;
 }

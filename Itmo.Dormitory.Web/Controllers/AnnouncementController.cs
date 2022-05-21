@@ -1,12 +1,8 @@
-﻿using AutoMapper;
-using Itmo.Dormitory.Core.Announcements;
+﻿using Itmo.Dormitory.Core.Announcements;
 using Itmo.Dormitory.Core.Announcements.Commands;
-using Itmo.Dormitory.Core.Announcements.Queries;
-using Itmo.Dormitory.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Itmo.Dormitory.Controllers
@@ -15,24 +11,18 @@ namespace Itmo.Dormitory.Controllers
     public class AnnouncementController : Controller
     {
         private readonly AnnouncementsAPIController _announcementsAPIController;
-        private readonly IMapper _mapper;
 
         public AnnouncementController(AnnouncementsAPIController announcementsAPIController)
         {
             _announcementsAPIController = announcementsAPIController;
-            _mapper = new MapperConfiguration(
-                cfg => cfg.CreateMap<GetAnnouncementsList.Response.Announcement, Announcement>()).CreateMapper();
         }
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
-            var announcements = GetAnnouncements();
-            return View(announcements);
-        }
-
-        public List<Announcement> GetAnnouncements()
-        {
-            var announcementList = _announcementsAPIController.GetAnnouncementsList().Result.Value.Announcements;
-            return _mapper.Map<IEnumerable<GetAnnouncementsList.Response.Announcement>, List<Announcement>>(announcementList);
+            var announcements = _announcementsAPIController.GetAnnouncementsList(page).Result;
+            ViewBag.Page = page;
+            ViewBag.Announcements = announcements;
+            
+            return View();
         }
 
         [HttpPost("Announcement/CreateAnnouncement")]
