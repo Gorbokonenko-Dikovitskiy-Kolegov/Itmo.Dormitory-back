@@ -21,7 +21,7 @@ namespace Itmo.Dormitory.Core.Reservations
 
 
         /// <summary>
-        /// �������� ��������� ����� ������
+        /// Получить доступные слоты записи
         /// </summary>
         /// <response code="400">Validation error</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -36,7 +36,7 @@ namespace Itmo.Dormitory.Core.Reservations
 
 
         /// <summary>
-        /// �������� ��������������� ������������� �������
+        /// Получить слоты записи, забронированные данным пользователем
         /// </summary>
         /// <response code="400">Validation error</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -49,7 +49,7 @@ namespace Itmo.Dormitory.Core.Reservations
         }
 
         /// <summary>
-        /// ��������������� ����
+        /// Забронировать слот
         /// </summary>
         /// <response code="400">Validation error</response>
         [HttpPut("reserve-slot")]
@@ -59,7 +59,7 @@ namespace Itmo.Dormitory.Core.Reservations
         }
 
         /// <summary>
-        /// �������� ����������
+        /// Отменить бронь
         /// </summary>
         /// <response code="400">Validation error</response>
         [HttpPut("cancel-reservation/{id}")]
@@ -69,7 +69,7 @@ namespace Itmo.Dormitory.Core.Reservations
             return Ok();
         }
         /// <summary>
-        /// ������� ���� ������
+        /// Создать слот записи
         /// </summary>
         /// <response code="400">Validation error</response>
         [HttpPost("create-slot")]
@@ -78,7 +78,7 @@ namespace Itmo.Dormitory.Core.Reservations
             return await _mediator.Send(command);
         }
         /// <summary>
-        /// ������� ���� ������
+        /// Удалить слот записи
         /// </summary>
         /// <response code="400">Validation error</response>
         [HttpPost("remove-slot/{id}")]
