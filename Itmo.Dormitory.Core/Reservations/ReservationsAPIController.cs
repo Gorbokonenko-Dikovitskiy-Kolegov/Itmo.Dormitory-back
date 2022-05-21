@@ -73,7 +73,7 @@ namespace Itmo.Dormitory.Core.Reservations
         /// </summary>
         /// <response code="400">Validation error</response>
         [HttpPost("create-slot")]
-        public async Task<ActionResult<CreateSlot.Response>> CreateSlot(CreateSlot.Command command)
+        public async Task<CreateSlot.Response> CreateSlot(CreateSlot.Command command)
         {
             return await _mediator.Send(command);
         }

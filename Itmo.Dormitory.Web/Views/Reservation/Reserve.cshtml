@@ -75,6 +75,12 @@
             </a>
         }
     </div>
+    @if (this.User.IsInRole("Admin"))
+    {
+        <a asp-action="AddSlot" asp-controller="Reservation" asp-route-roomName="@ViewBag.RoomName">
+            <button class="back">Добавить</button>
+        </a>
+    }
     <button class="back" onclick="location.href='@Url.Action("Index", "Reservation")'">Назад</button>
 </div>
 </body>

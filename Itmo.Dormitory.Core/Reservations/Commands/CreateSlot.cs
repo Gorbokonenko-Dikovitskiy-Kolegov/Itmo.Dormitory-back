@@ -15,7 +15,7 @@ namespace Itmo.Dormitory.Core.Reservations.Commands
     {
         public record Command(string RoomName, DateTime Starts) : IRequest<Response>;
 
-        public class CommandValidator : AbstractValidator<CreateSlot.Command>
+        public class CommandValidator : AbstractValidator<Command>
         {
             public CommandValidator()
             {

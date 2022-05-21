@@ -145,4 +145,19 @@ body {
     color: white;
 }
 
-.pagination button:hover:not(.active) {background-color: #ddd;}
+.pagination button:hover:not(.active) {
+    background-color: #ddd;
+}
+
+.mycontainer {
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.mycontainer input {
+    height: 50px;
+    width: 50%;
+}

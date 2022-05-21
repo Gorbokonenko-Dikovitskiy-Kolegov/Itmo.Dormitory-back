@@ -1,0 +1,27 @@
+@{
+    ViewData["Title"] = "SlotAdded";
+}
+
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <title>SlotAdded</title>
+</head>
+<body>
+<header>
+    <h1 class="room__header">Результат:</h1>
+</header>
+<div>
+    @if (ViewBag.Success)
+    {
+        <p>Слот успешно добавлен</p>
+    }
+    @if (!ViewBag.Success)
+    {
+        <p>Не получилось :( кажется такой слот уже существует</p>
+    }
+    <button class="back" onclick="location.href='@Url.Action("Index", "Reservation")'">Назад</button>
+</div>
+</body>
+</html>

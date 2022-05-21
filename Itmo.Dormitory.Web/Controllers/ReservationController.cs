@@ -1,6 +1,7 @@
 using Itmo.Dormitory.Core.Reservations;
 using Microsoft.AspNetCore.Authorization;
 using Itmo.Dormitory.Core.Reservations.Commands;
+using Itmo.Dormitory.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -43,6 +44,26 @@ namespace Itmo.Dormitory.Controllers
         public IActionResult CancelReservation(int id)
         {
             ViewBag.Success = _controller.CancelReservation(id).Result is OkResult;
+            return View();
+        }
+        
+        [HttpGet]
+        public IActionResult AddSlot(string roomName)
+        {
+            TempData["RoomName"] = roomName;
+            return View();
+        }
+        
+        [HttpPost]
+        public IActionResult AddSlot(DateTimePicker picker, string roomName)
+        {
+            TempData["Success"] = _controller.CreateSlot(new CreateSlot.Command(TempData["RoomName"].ToString(), picker.Starts)).Result.Success;
+            return RedirectToAction("SlotAdded", "Reservation");
+        }
+        
+        public IActionResult SlotAdded()
+        {
+            ViewBag.Success = TempData["Success"];
             return View();
         }
     }
