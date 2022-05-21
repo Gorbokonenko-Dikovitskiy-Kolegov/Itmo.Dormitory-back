@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Itmo.Dormitory.Core.Reservations.Commands;
 using Itmo.Dormitory.Core.Reservations.Queries;
+using Itmo.Dormitory.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,35 +21,35 @@ namespace Itmo.Dormitory.Core.Reservations
 
 
         /// <summary>
-        /// Получить доступные слоты записи
+        /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         /// </summary>
         /// <response code="400">Validation error</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpPost("create")]
-        [HttpGet("get-available-slots/{roomName}")]
-        public async Task<GetAvailableSlots.Result> GetAvailableSlots(string roomName)
+        [HttpGet("get-available-slots/{roomName}/{page}")]
+        public async Task<PagedResponse<Reservation>> GetAvailableSlots(string roomName, int page)
         {
-            return await _mediator.Send(new GetAvailableSlots.Query(roomName));
+            return await _mediator.Send(new GetAvailableSlots.Query(roomName, page));
         }
 
 
         /// <summary>
-        /// Получить забронированные пользователем комнаты
+        /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         /// </summary>
         /// <response code="400">Validation error</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [HttpGet("get-list-by-owner/{isuNumber}")]
-        public async Task<GetReservationsByOwner.Result> GetReservationsByOwner(string isuNumber)
+        [HttpGet("get-list-by-owner/{isuNumber}/{page}")]
+        public async Task<PagedResponse<Reservation>> GetReservationsByOwner(string isuNumber, int page)
         {
-            return await _mediator.Send(new GetReservationsByOwner.Query(isuNumber));
+            return await _mediator.Send(new GetReservationsByOwner.Query(isuNumber, page));
         }
 
         /// <summary>
-        /// Зарезервировать слот
+        /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
         /// </summary>
         /// <response code="400">Validation error</response>
         [HttpPut("reserve-slot")]
@@ -58,7 +59,7 @@ namespace Itmo.Dormitory.Core.Reservations
         }
 
         /// <summary>
-        /// Отменить резервацию
+        /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         /// </summary>
         /// <response code="400">Validation error</response>
         [HttpPut("cancel-reservation/{id}")]
@@ -68,7 +69,7 @@ namespace Itmo.Dormitory.Core.Reservations
             return Ok();
         }
         /// <summary>
-        /// Создать слот записи
+        /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         /// </summary>
         /// <response code="400">Validation error</response>
         [HttpPost("create-slot")]
@@ -77,7 +78,7 @@ namespace Itmo.Dormitory.Core.Reservations
             return await _mediator.Send(command);
         }
         /// <summary>
-        /// Удалить слот записи
+        /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         /// </summary>
         /// <response code="400">Validation error</response>
         [HttpPost("remove-slot/{id}")]

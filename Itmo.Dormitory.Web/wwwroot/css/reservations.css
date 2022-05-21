@@ -113,3 +113,29 @@ body {
     display: inline-block;
     margin-bottom: 5%;
 }
+
+.all__container {
+    display: flex;
+    flex-direction: column;
+}
+
+.pagination {
+    display: inline-block;
+}
+
+.pagination button {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: white;
+    border: 0px;
+}
+
+.pagination button.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.pagination button:hover:not(.active) {background-color: #ddd;}
