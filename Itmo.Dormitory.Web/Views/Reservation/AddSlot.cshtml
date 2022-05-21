@@ -1,0 +1,26 @@
+@model DateTimePicker
+
+@{
+    ViewData["Title"] = "AddSlot";
+}
+
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <title>AddSlot</title>
+</head>
+<body>
+<header>
+    <h1 class="room__header">Добавить слот: @ViewBag.RoomName</h1>
+</header>
+<div class="mycontainer">
+    @using (Html.BeginForm(new {style = "height:50px"}))
+    {
+        @Html.EditorFor(model => model.Starts)
+        <button type="submit" class="back" onclick="location.href='@Url.Action("AddSlot", "Reservation", new {roomName = ViewBag.RoomName})">Добавить</button>
+    }
+    <button class="back" onclick="location.href='@Url.Action("Index", "Reservation")'">Назад</button>
+</div>
+</body>
+</html>
