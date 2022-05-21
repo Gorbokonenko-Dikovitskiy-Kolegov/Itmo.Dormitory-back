@@ -1,4 +1,3 @@
-@model List<Announcement>
 @{
     ViewData["Title"] = "Announcements";
 }
@@ -18,51 +17,101 @@
     <script src="~/js/Announcement.js"></script>
 </head>
 <body>
-    <main>
-        <section class="announcements">
-            <ul class="announcements__list">
-                <li class="announcements__item box-shadow" id="announcements__item_$__id__$">
-                    <article class="announcement">
-                        <div class="announcement__description">
-                            <h3 class="announcement__title">$__title__$</h3> 
-                            <p class="announcement__content">$__description__$</p>
-                            <p class="announcement__date">$__lastUpdateTime__$</p>
-                        </div>
-                    </article>
-                    @if (this.User.IsInRole("Admin"))
-                    {
-                        <section class="Update-container">
-                        <a href="#UpdateForm_$__id__$"><img class="icon" src="~/images/edit.png"></a>
-                        <form method="post" class="close-form" action="~/Announcement/DeleteAnnouncement">
-                            <input type="text" value=$__id__$ name="id" style="visibility: hidden" required>
-                            <button type="submit" class="close"><img class="icon" src="~/images/delete.png"></button>
-                        </form>
-                        <div class="modal" id="UpdateForm_$__id__$">
-                            <form method="post" class="modalcontent" action="~/Announcement/EditAnnouncement">
-                             <h1>Обновить объявление</h1> <a class="close" href="#">×</a>
-                             <input type="text" value=$__id__$ name="id" style="visibility: hidden" required>
-                             <input type="text" class="form-input" value=$__title__$ name="title" required>
-                             <input type="text" class="form-input" value=$__description__$ name="description" required>
-                             <button type="submit" class="create">Обновить</button>
-                            </form>
-                        </div>
-                    </section>
-                    }
-                </li>
-            </ul>
-        </section>
-
-        <aside class="fonRectangle">
-            <div class="rectangle"></div>
-        </aside>
-        <section class="filter-container">
-            @if (this.User.IsInRole("Admin"))
+<main>
+    <section class="announcements">
+        @if (ViewBag.Announcements.Data.Count != 0)
+        {
+            @foreach (var item in ViewBag.Announcements.Data)
             {
-                <a class="create-button" href="#CreateForm">Создать объявление</a>
-            }          
-          <div class="filter-box">
+                <ul class="announcements__list">
+                    <li class="announcements__item box-shadow">
+                        <article class="announcement">
+                            <div class="announcement__description">
+                                <h3 class="announcement__title">@item.Information.Title</h3>
+                                <p class="announcement__content">@item.Information.Description</p>
+                                <p class="announcement__date">@item.LastUpdateTime</p>
+                            </div>
+                            @if (this.User.IsInRole("Admin"))
+                            {
+                                <section class="Update-container">
+                                    <a href="#UpdateForm_@item.Id" onclick=""><img class="icon" src="~/images/edit.png"></a>
+                                    <form method="post" class="close-form" action="~/Announcement/DeleteAnnouncement">
+                                        <input type="text" value=@item.Id name="id" style="visibility: hidden" required>
+                                        <button type="submit" class="close"><img class="icon" src="~/images/delete.png"></button>
+                                    </form>
+                                    <div class="modal" id="UpdateForm_@item.Id">
+                                        <form method="post" class="modalcontent" action="~/Announcement/EditAnnouncement">
+                                            <h1>Обновить объявление</h1> <a class="close" href="#">×</a>
+                                            <input type="text" value=@item.Id name="id" style="visibility: hidden" required>
+                                            <input type="text" class="form-input" value=@item.Information.Title name="title" required>
+                                            <input type="text" class="form-input" value=@item.Information.Description name="description" required>
+                                            <button type="submit" class="create">Обновить</button>
+                                        </form>
+                                    </div>
+                                </section>
+                            }
+                        </article>
+                    </li>
+                </ul>
+            }
+        }
+        <div class="pagination">
+            @if (ViewBag.Announcements.HasPreviousPage)
+            {
+                <a asp-action="Index" asp-controller="Announcement" asp-route-page="@(ViewBag.Page - 1)">
+                    <button>Предыдущая</button>
+                </a>
+            }
+            @if (!ViewBag.Announcements.HasPreviousPage)
+            {
+                <a asp-action="Index" asp-controller="Announcement" asp-route-page="@(ViewBag.Page - 1)">
+                    <button disabled="disabled">Предыдущая</button>
+                </a>
+            }
+            @if (ViewBag.Announcements.Pages > 1)
+            {
+                @for (int i = 1; i <= ViewBag.Announcements.Pages; i++)
+                {
+                    @if (i == ViewBag.Page)
+                    {
+                        <a asp-action="Index" asp-controller="Announcement" asp-route-page="@i">
+                            <button class="active-button" style="background-color: #dc2064; color: white;">@i</button>
+                        </a>
+                    }
+                    @if (i != ViewBag.Page)
+                    {
+                        <a asp-action="Index" asp-controller="Announcement" asp-route-page="@i">
+                            <button>@i</button>
+                        </a>
+                    }
+                }
+            }
+            @if (ViewBag.Announcements.HasNextPage)
+            {
+                <a asp-action="Index" asp-controller="Announcement" asp-route-page="@(ViewBag.Page + 1)">
+                    <button>Следующая</button>
+                </a>
+            }
+            @if (!ViewBag.Announcements.HasNextPage)
+            {
+                <a asp-action="Index" asp-controller="Announcement" asp-route-page="@(ViewBag.Page + 1)">
+                    <button disabled="disabled">Следующая</button>
+                </a>
+            }
+        </div>
+    </section>
+
+    <aside class="fonRectangle">
+        <div class="rectangle"></div>
+    </aside>
+    <section class="filter-container">
+        @if (this.User.IsInRole("Admin"))
+        {
+            <a class="create-button" href="#CreateForm">Создать объявление</a>
+        }
+        <div class="filter-box">
             <div class="search-box">
-                <img src ="~/images/magnifier.png" style="width: 10%; height: 10%">
+                <img src="~/images/magnifier.png" style="width: 10%; height: 10%">
                 <input id="search" placeholder="Search" type="search">
             </div>
             <div class="sort-box">
@@ -73,8 +122,8 @@
                 </select>
             </div>
             <hr>
-          </div>
-          <div class="checkbox-container">
+        </div>
+        <div class="checkbox-container">
             <label>Category</label>
             <div class="checkbox">
                 <input type="checkbox">
@@ -88,19 +137,19 @@
                 <input type="checkbox">
                 <label>Разное</label>
             </div>
-          </div>
-        </section>
-    
+        </div>
+    </section>
 
-        <div class="modal" id="CreateForm">
-          <form method="post" class="modalcontent" action="~/Announcement/CreateAnnouncement">
+
+    <div class="modal" id="CreateForm">
+        <form method="post" class="modalcontent" action="~/Announcement/CreateAnnouncement">
             <h1>Создать объявление</h1> <a class="close" href="#">×</a>
             <input type="text" class="form-input" placeholder="Введите заголовок объявления" name="title" required>
             <input type="text" class="form-input"placeholder="Введите содержимое объявления" name="description" required>
             <button type="submit" class="create">Создать</button>
-          </form>
-          </div>
-    </main>
+        </form>
+    </div>
+</main>
 
     <script>
         paint("announcements__item");

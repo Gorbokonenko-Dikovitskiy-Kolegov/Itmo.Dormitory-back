@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Itmo.Dormitory.Core.Announcements.Commands;
 using Itmo.Dormitory.Core.Announcements.Queries;
 using System;
+using Itmo.Dormitory.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 
 namespace Itmo.Dormitory.Core.Announcements
@@ -85,10 +86,10 @@ namespace Itmo.Dormitory.Core.Announcements
         /// <response code="200">Success</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [HttpGet("get-list")]
-        public async Task<ActionResult<GetAnnouncementsList.Response>> GetAnnouncementsList()
+        [HttpGet("get-list/{page}")]
+        public async Task<PagedResponse<Announcement>> GetAnnouncementsList(int page)
         {
-            return await _mediator.Send(new GetAnnouncementsList.Query());
+            return await _mediator.Send(new GetAnnouncementsList.Query(page));
         }
     }
 }
