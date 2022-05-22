@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Itmo.Dormitory.API.Infrastructure.Middlewares;
 using Itmo.Dormitory.Core.Announcements;
 using Itmo.Dormitory.Core.Announcements.Commands;
 using Itmo.Dormitory.Core.Announcements.Queries;
@@ -16,15 +17,18 @@ namespace Itmo.Dormitory.Controllers
     {
         private readonly AnnouncementsAPIController _announcementsAPIController;
         private readonly IMapper _mapper;
+        private readonly ActivityTracker _tracker;
 
-        public AnnouncementController(AnnouncementsAPIController announcementsAPIController)
+        public AnnouncementController(AnnouncementsAPIController announcementsAPIController, ActivityTracker tracker)
         {
             _announcementsAPIController = announcementsAPIController;
+            _tracker = tracker;
             _mapper = new MapperConfiguration(
                 cfg => cfg.CreateMap<GetAnnouncementsList.Response.Announcement, Announcement>()).CreateMapper();
         }
         public IActionResult Index()
         {
+            _tracker.EndpointVissited("Announcements");
             var announcements = GetAnnouncements();
             return View(announcements);
         }

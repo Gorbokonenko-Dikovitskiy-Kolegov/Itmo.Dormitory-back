@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Itmo.Dormitory.Core.Reservations.Commands;
 using Itmo.Dormitory.Web.Models;
 using Microsoft.AspNetCore.Mvc;
-
+using Itmo.Dormitory.API.Infrastructure.Middlewares;
 
 namespace Itmo.Dormitory.Controllers
 {
@@ -11,12 +11,17 @@ namespace Itmo.Dormitory.Controllers
     public class ReservationController : Controller
     {
         private readonly ReservationsAPIController _controller;
-        public ReservationController(ReservationsAPIController controller)
+
+        private readonly ActivityTracker _tracker;
+
+        public ReservationController(ReservationsAPIController controller, ActivityTracker tracker)
         {
             _controller = controller;
+            _tracker = tracker;
         }
         public IActionResult Index()
         {
+            _tracker.EndpointVissited("Reservations");
             return View();
         }
         

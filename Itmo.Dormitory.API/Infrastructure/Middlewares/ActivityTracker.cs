@@ -16,7 +16,7 @@ namespace Itmo.Dormitory.API.Infrastructure.Middlewares
 
         public void EndpointVissited(string route)
         {
-            var res = _dormitoryDbContext.Counters.Where(el => el.Route == route).First();
+            var res = _dormitoryDbContext.Counters.Where(el => el.Route == route).FirstOrDefault();
             if (res == null)
             {
                 res = _dormitoryDbContext.Counters.Add(new Domain.Entities.Counter

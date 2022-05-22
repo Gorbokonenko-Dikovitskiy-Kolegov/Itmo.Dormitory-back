@@ -4,6 +4,7 @@ using Itmo.Dormitory.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Itmo.Dormitory.DataAccess.Migrations
 {
     [DbContext(typeof(DormitoryDbContext))]
-    partial class DormitoryDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220522151237_addCounter")]
+    partial class addCounter
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
