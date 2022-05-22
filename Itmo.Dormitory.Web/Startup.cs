@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using Itmo.Dormitory.Core.SignalR;
+using Itmo.Dormitory.API.Infrastructure.Middlewares;
 
 namespace Itmo.Dormitory.Web
 {
@@ -35,6 +36,7 @@ namespace Itmo.Dormitory.Web
             services.AddScoped<AnnouncementsAPIController>();
             services.AddScoped<ReservationsAPIController>();
             services.AddCoreModule();
+            services.AddScoped<IActivityTracker, ActivityTracker>();
 
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<DormitoryDbContext>()

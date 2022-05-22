@@ -16,7 +16,7 @@ namespace Itmo.Dormitory.DataAccess
         public DbSet<Application> Applications { get; set; } = null!;
         public DbSet<IdentityUser> IdentityUsers { get; set; } = null!;
         public DbSet<Reservation> Reservations { get; set; } = null!;
-
+        public DbSet<Counter> Counters { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
