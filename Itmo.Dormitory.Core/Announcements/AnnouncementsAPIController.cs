@@ -5,6 +5,7 @@ using Itmo.Dormitory.Core.Announcements.Commands;
 using Itmo.Dormitory.Core.Announcements.Queries;
 using System;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Itmo.Dormitory.Core.Announcements
 {
@@ -26,9 +27,15 @@ namespace Itmo.Dormitory.Core.Announcements
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpPost("create")]
         public async Task<ActionResult<CreateAnnouncement.Response>> CreateAnnouncement(CreateAnnouncement.Command command)
         {
+            if (!User.Identity.IsAuthenticated)
+                return Unauthorized();
+            if (!User.IsInRole("Admin"))
+                return NotFound();
+
             return await _mediator.Send(command);
         }
 
@@ -41,10 +48,16 @@ namespace Itmo.Dormitory.Core.Announcements
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
 
         [HttpPut("edit")]
         public async Task<ActionResult<EditAnnouncement.Response>> EditAnnouncement(EditAnnouncement.Command command)
         {
+            if (!User.Identity.IsAuthenticated)
+                return Unauthorized();
+            if (!User.IsInRole("Admin"))
+                return NotFound();
+
             return await _mediator.Send(command);
         }
 
@@ -57,9 +70,15 @@ namespace Itmo.Dormitory.Core.Announcements
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpDelete("delete")]
         public async Task<ActionResult> DeleteAnnouncementById(DeleteAnnouncement.Command command)
         {
+            if (!User.Identity.IsAuthenticated)
+                return Unauthorized();
+            if (!User.IsInRole("Admin"))
+                return NotFound();
+
             await _mediator.Send(command);
             return Ok();
         }
@@ -76,6 +95,9 @@ namespace Itmo.Dormitory.Core.Announcements
         [HttpGet("get-by-id")]
         public async Task<ActionResult<GetAnnouncementById.Response>> GetAnnouncementById(Guid id)
         {
+            if (!User.Identity.IsAuthenticated)
+                return Unauthorized();
+
             return await _mediator.Send(new GetAnnouncementById.Query(id));
         }
 
@@ -88,6 +110,9 @@ namespace Itmo.Dormitory.Core.Announcements
         [HttpGet("get-list")]
         public async Task<ActionResult<GetAnnouncementsList.Response>> GetAnnouncementsList()
         {
+            if (!User.Identity.IsAuthenticated)
+                return Unauthorized();
+
             return await _mediator.Send(new GetAnnouncementsList.Query());
         }
     }

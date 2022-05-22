@@ -61,16 +61,6 @@ namespace Itmo.Dormitory.API.Infrastructure.Extensions
                         return string.Join(".", typeNames);
                     });
 
-                    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                    {
-                        In = ParameterLocation.Header,
-                        Description = "Please enter token",
-                        Name = "Authorization",
-                        Type = SecuritySchemeType.Http,
-                        BearerFormat = "JWT",
-                        Scheme = "bearer"
-                    });
-
                     options.OperationFilter<AuthResponsesOperationFilter>();
                 });
             });

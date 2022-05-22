@@ -18,6 +18,7 @@ namespace Itmo.Dormitory.API.Infrastructure.Authentification
         {
             _signInManager = signInManager;
         }
+
         [AllowAnonymous]
         [HttpPost, Route("login")]
         public  IActionResult Login(string userName, string password)
@@ -29,22 +30,22 @@ namespace Itmo.Dormitory.API.Infrastructure.Authentification
             var result = _signInManager.PasswordSignInAsync(userName, password, false, false);
             if (result.Result.Succeeded)
             {
-                var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@2410"));
-                var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
-                var tokenOptions = new JwtSecurityToken(
-                    issuer: "CodeMaze",
-                    audience: "https://localhost:5001",
-                    claims: new List<Claim>(),
-                    expires: DateTime.Now.AddMinutes(5),
-                    signingCredentials: signinCredentials
-                );
-                var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-                return Ok(new { Token = tokenString });
+                return Ok();
             }
             else
             {
                 return Unauthorized();
             }
         }
+
+        [AllowAnonymous]
+        [HttpPost, Route("logout")]
+        public IActionResult Logout()
+        {
+            _signInManager.SignOutAsync();
+            return Ok();
+        }
+
+
     }
 }
